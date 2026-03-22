@@ -15,7 +15,7 @@ const Load = () => {
             animate={{ top: load ? '-100%' : 0 }}
             transition={{ duration: 0.5 }}
             className="w-full h-full fixed left-0 top-0 flex items-center justify-center bg-linear-to-t from-yellow-50 to-red-50 z-50"
-        > <Image src="/spinner.gif" alt="Spinner Gif" width={50} height={50} />
+        > <Image src="/spinner.gif" alt="Spinner Gif" width={50} height={50} loading='eager' />
         </motion.div>
     )
 }

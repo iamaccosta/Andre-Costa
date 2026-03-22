@@ -20,7 +20,7 @@ const PricingPlans = () => {
                         transition={{ duration: 0.5, delay: i * 0.2, scale: { duration: 0.15 } }}
                         key={i}
                         className={`w-67.5 flex flex-col gap-y-6 p-6 border border-red-400 rounded-xl text-gray-600 transition-colors ${
-                            i === 1 ? "lg:w-92.5 md:w-[320px] bg-white" : "lg:w-87.5 md:w-75 bg-zinc-50"
+                            i === 1 ? "lg:w-92.5 md:w-[320px] bg-white dark:bg-zinc-600" : "lg:w-87.5 md:w-75 bg-zinc-50 dark:bg-zinc-700"
                         }`}
                     >
                         <h1 className="lg:text-3xl text-lg font-light tracking-wide text-center dark:text-white">{plan.title}</h1>

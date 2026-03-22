@@ -22,13 +22,13 @@ const Experience = () => {
     });
 
     return <div id="experience" className="relative py-20">
-        <Heading title="Experience & Education" />
+        <Heading title="Education & Work Experience" />
         <Image
             src="/education.png"
             alt="Experience and Education"
             width={400}
             height={400}
-            className="absolute -top-4 right-0 opacity-70 lg:block hidden"
+            className="absolute top-5 right-0 opacity-70 lg:block hidden"
         />
         <div ref={contaierRef} className="relative w-full h-full flex flex-col items-center justify-center lg:gap-y-10 gap-y-20 py-10">
             {experienceData.map((data, i) => (
@@ -47,13 +47,13 @@ const Experience = () => {
                         transition={{duration: .7, type: 'spring', stiffness: 50}}
                         className="relative flex flex-col gap-y-3 rounded-md border border-red-300 bg-white p-4 tracking-wide sm:text-sm dark:bg-zinc-700 transition-colors z-20"
                     >
-                        <h1 className="md:text-xl sm:text-lg font-light text-gray-700 dark:text-white">{data.title}</h1>
+                        <h1 className="md:text-xl sm:text-lg font-semibold text-gray-700 dark:text-white">{data.title}</h1>
                         <p className="text-gray-800 dark:text-gray-100">
-                            <span className="block font-light">Education:</span>
+                            <span className="block font-semibold">{data.work ? 'Work:' : 'Education:'}</span>
                             <span className="block pl-2 font-extralight">{data.education}</span>
                         </p>
                         <div className="text-gray-800 dark:text-gray-200 transition-colors">
-                            <span className="font-light">Experience:</span>
+                            <span className="font-semibold">Experience:</span>
                             <ul className="pl-2">
                                 {data.experience.map((exp, j) => (
                                     <li key={j} className="my-1 font-extralight">{exp}</li>
@@ -72,7 +72,7 @@ const Experience = () => {
                             : 'lg:right-full translate-x-1/2 right-1/2'
                         }`}
                     >
-                        {date - experienceData.length + i + 1}
+                        {data.year}
                     </div>
                 </div>
             ))}

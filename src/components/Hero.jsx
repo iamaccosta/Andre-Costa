@@ -68,8 +68,8 @@ const Hero = () => {
                         >Hi👋</motion.span>
                     </motion.div>
                     <h1 className='text-center md:text-3xl font-bold tracking-wider text-gray-500 text-2xl dark:text-white transition-colors'
-                    >My Name is André Costa</h1>
-                    <p className='text-lg tracking-wider text-gray-700 dark:text-gray-200 transition-colors'>I am a web developer 😁</p>
+                    >Eng. André C. Costa</h1>
+                    <p className='text-lg tracking-wider text-gray-700 dark:text-gray-200 transition-colors'><b><i>One day of doing things is more worth than one month of planning them 😁</i></b></p>
                 </motion.div>
                 <motion.div 
                     initial={{ opacity: 0, y: 100 }}
@@ -77,7 +77,7 @@ const Hero = () => {
                     transition={{ delay: 0.5 }}
                     className="flex items-center justify-center gap-x-6 mt-6 text-yellow-600 sm:text-2xl">
                     {heroIcons.map((icon, index) => (
-                        <a href="#" key={index} className="hover:bg-red-400 hover:text-white rounded-full">{icon}</a>
+                        <a href={icon.link} key={index} className="hover:bg-red-400 hover:text-white rounded-full">{icon.icon}</a>
                     ))}
                     
                 </motion.div>
@@ -85,11 +85,11 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    href="#" 
+                    href="#contact" 
                     className='mx-auto mt-7 block w-max rounded-lg bg-red-400 px-3 py-1 font-light capitalize tracking-wider text-white hover:bg-red-500 transition-colors'
                     onMouseEnter={() => setButtonHover(true)}
                     onMouseLeave={() => setButtonHover(false)}
-                >Talk to me</motion.a>
+                >Send me a Message</motion.a>
             </div>
         </div>
     )
