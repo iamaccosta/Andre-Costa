@@ -16,7 +16,7 @@ const Project = ({ index, ...project }) => {
             onClick={() => setShow(!show)}
         >
             <Image
-                src={project.url}
+                src={project.image}
                 alt={project.name}
                 width={400}
                 height={400}
@@ -29,7 +29,7 @@ const Project = ({ index, ...project }) => {
                 className="absolute top-0 w-full h-full flex flex-col items-center justify-center gap-y-2 bg-white/95 p-6 rounded-lg dark:bg-zinc-700 transition-colors opacity-95"
             >
                 <h2 className="text-lg font-bold tracking-wide text-gray-500 dark:text-white">{project.name}</h2>
-                <p className="text-justify text-gray-500 first-letter:pl-2 dark:text-gray-100">{project.desc}</p>
+                <p className="text-justify text-gray-500 first-letter:pl-2 dark:text-gray-100">{project.summary}</p>
             </motion.div>       
         </motion.div>
     )

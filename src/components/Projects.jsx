@@ -2,11 +2,11 @@
 import { animate, motion } from "framer-motion"
 import Heading from "./sub/Heading"
 import Project from "./sub/Project"
-import { projectsButton, projectsData } from "@/assets"
+import { projectDomains, projectsData } from "@/assets"
 import { useEffect, useRef, useState } from "react"
 
 const Projects = () => {
-    const [tech, setTech] = useState("All");
+    const [domain, setDomain] = useState("All");
     const [index, setIndex] = useState(0);
     const prevIndex = useRef(0);
     const buttonsRef = useRef([]);
@@ -27,14 +27,14 @@ const Projects = () => {
             className="min-h-screen py-20">
             <Heading title={"Projects"} />
             <div className="flex flex-wrap items-center justify-between gap-4 py-10">
-                { projectsButton.map((text, i) => (
+                { projectDomains.map((text, i) => (
                     <motion.button 
                         key={i}
                         initial={{ opacity: i === 0 ? 1 : 0.5, scale: i === 0 ? 1.2 : 1 }}
                         className="border border-yellow-500 rounded-xl px-2 py-1 text-sm font-light tracking-wider text-gray-400 cursor-pointer"
                         onClick={() => {
                             setIndex(i);
-                            setTech(text)
+                            setDomain(text)
                         }}
                         ref={(el) => buttonsRef.current.push(el)}
                     >{text}</motion.button>
@@ -42,8 +42,7 @@ const Projects = () => {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-5">
                 { projectsData.filter((project) => {
-                    return project.tech.some((item) => 
-                    (tech === "All" ? true: item === tech))
+                    return domain === "All" ? true : project.domain === domain
                 })
                 .map((project, i) => (
                     <motion.div 

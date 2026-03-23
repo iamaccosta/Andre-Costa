@@ -256,85 +256,152 @@ export const reviewsData = [
 // Projects
 export const projectsData = [
   {
-    name: 'SparkleGrove.com',
-    desc: 'A lifestyle blog featuring DIY crafts, home decor ideas, and inspiration for creating a cozy and stylish living space.',
-    url: '/projects/image-1.jpg',
-    tech: ['Figma', 'Photoshop', 'HTML'],
+    name: 'Hotel? Privago',
+    summary:
+      'Full-stack hotel search and information system designed to aggregate, query, and present global hospitality data.',
+    highlights: [
+      'Designed and implemented a structured backend for managing hotel data, search queries, and filtering logic.',
+      'Developed a responsive frontend focused on usability and efficient data exploration.',
+      'Handled integration between frontend and backend layers, ensuring consistent data flow and performance.',
+    ],
+    image: '/projects/image-1.jpg',
+    domain: 'Fullstack',
+    source: 'academic',
+    tech: ['Python', 'SOLR', 'HTML', 'CSS', 'JavaScript', 'Node.js'],
+    repoUrl: 'https://github.com/Fabio-A-Sa/Privago',
+    status: 'completed',
   },
   {
-    name: 'TechTrekker.net',
-    desc: 'A technology news and review site covering the latest gadgets, software updates, and trends in the tech industry.',
-    url: '/projects/image-2.jpg',
-    tech: ['Figma', 'Photoshop'],
+    name: 'HandiMarket',
+    summary:
+      'Marketplace platform designed to support accessible commerce, focusing on usability and inclusive interaction patterns.',
+    highlights: [
+      'Implemented core marketplace features including product management, user interaction, and transactional flows.',
+      'Focused on accessibility considerations and user-centric design principles.',
+      'Collaborated in a team environment, contributing to both frontend and backend components.',
+    ],
+    image: '/projects/image-2.jpg',
+    domain: 'Fullstack',
+    source: 'academic',
+    tech: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'SQL'],
+    repoUrl: 'https://github.com/LGP-FEUP-2024/SC25/tree/main',
+    status: 'completed',
   },
   {
-    name: 'CozyNestHomes.org',
-    desc: 'A resource for homeowners and renters alike, offering tips on interior design, home improvement projects, and sustainable living practices.',
-    url: '/projects/image-3.jpg',
-    tech: ['HTML', 'CSS', 'JavaScript'],
+    name: 'OnlyFEUP',
+    summary:
+      'Social network platform tailored for FEUP students, enabling communication, content sharing, and community interaction.',
+    highlights: [
+      'Designed relational database schema to support user profiles, posts, and interactions.',
+      'Implemented backend logic for authentication, data persistence, and social features.',
+      'Integrated frontend and backend components into a cohesive full-stack application.',
+    ],
+    image: '/projects/image-3.jpg',
+    domain: 'Fullstack',
+    source: 'academic',
+    tech: ['HTML', 'Laravel', 'PHP', 'SQL'],
+    repoUrl:
+      'https://github.com/Fabio-A-Sa/Y3S1-LabDBWeb/tree/main/Project',
+    status: 'completed',
   },
   {
-    name: 'WanderLuxeTravels.co',
-    desc: 'A travel website that provides luxury travel guides, destination reviews, and tips for planning unforgettable vacations.',
-    url: '/projects/image-4.jpg',
-    tech: ['HTML', 'CSS', 'JavaScript', 'TailwindCSS'],
+    name: 'Master Dissertation – Digital Twins in Industrial Environments',
+    summary:
+      'Research work focused on the application of standardized Digital Twins using Asset Administration Shell (AAS) in industrial production environments.',
+    highlights: [
+      'Designed and evaluated Digital Twin architectures aligned with Industry 4.0 standards.',
+      'Applied Asset Administration Shell (AAS) concepts to represent and manage industrial assets.',
+      'Explored integration of IIoT systems, communication protocols, and data pipelines for real-world scenarios.',
+    ],
+    image: '/projects/image-4.jpg',
+    domain: 'Research',
+    source: 'academic',
+    tech: ['AAS', 'MQTT', 'Kafka', 'IIoT'],
+    repoUrl:
+      'https://repositorio-aberto.up.pt/handle/10216/169157',
+    status: 'completed',
   },
   {
-    name: 'ByteBoosters.io',
-    desc: 'A tech startup specializing in software development, offering innovative solutions and services for businesses looking to enhance their digital presence.',
-    url: '/projects/image-5.jpg',
-    tech: ['Figma', 'ReactJS', 'TailwindCSS', 'CSS'],
+    name: 'AAS-PLC Pipeline',
+    summary:
+      'Industrial application connecting Asset Administration Shell-based Digital Twins with Siemens S7 PLCs for real-time monitoring and control.',
+    highlights: [
+      'Developed a RESTful backend using Spring Boot to enable bidirectional communication between AAS models and PLC systems.',
+      'Integrated industrial communication protocols to support real-time data acquisition and control.',
+      'Enabled monitoring and remote operation of industrial assets through a Digital Twin abstraction layer.',
+    ],
+    image: '/projects/image-5.jpg',
+    domain: 'IoT',
+    source: 'professional',
+    tech: ['Java', 'Spring Boot', 'AAS', 'PLC', 'REST'],
+    status: 'prototype',
   },
   {
-    name: 'GreenLeafGardens.biz',
-    desc: 'An online store and community hub for gardening enthusiasts, featuring a wide range of plants, gardening tools, and expert advice.',
-    url: '/projects/image-6.jpg',
-    tech: ['ReactJS', 'TailwindCSS', , 'CSS', 'FramerMotion'],
+    name: 'AAS for Bio-Products in Aquaculture',
+    summary:
+      'Ongoing research project focused on developing Asset Administration Shell templates for aquaculture production systems, with application to seaweed cultivation.',
+    highlights: [
+      'Designed AAS templates to model biological growth processes and cultivation environments.',
+      'Applied Digital Twin concepts to non-traditional industrial domains (aquaculture).',
+      'Contributed to structuring data models and semantic representations for biological production systems.',
+    ],
+    image: '/projects/image-6.jpg',
+    domain: 'Research',
+    source: 'professional',
+    tech: ['AAS', 'Digital Twins', 'IIoT'],
+    status: 'in-progress',
   },
   {
-    name: 'PixelPerfectDesigns.info',
-    desc: 'A graphic design portfolio showcasing the work of a freelance designer, including branding, web design, and illustration projects.',
-    url: '/projects/image-7.jpg',
-    tech: ['NextJS', 'FramerMotion'],
+    name: 'GymNote',
+    summary:
+      'Mobile application for workout tracking and training management, initially based on an Android development course and later extended into a personal product.',
+    highlights: [
+      'Designed application structure and data models for tracking workouts, exercises, and progress.',
+      'Extended beyond course baseline by adapting features to real personal use cases.',
+      'Focused on usability and consistency for day-to-day usage in training routines.',
+    ],
+    image: '/projects/image-7.jpg',
+    domain: 'Mobile',
+    source: 'course',
+    tech: ['Kotlin', 'Android'],
+    repoUrl:
+      'https://www.udemy.com/course/android-kotlin-developer/',
+    status: 'completed',
   },
   {
-    name: 'HarmonyHealthHub.com',
-    desc: ' A wellness website focused on holistic health, offering articles on nutrition, fitness, mental health, and alternative therapies.',
-    url: '/projects/image-8.jpg',
-    tech: ['NextJS', 'ReactJS', 'FramerMotion'],
-  },
-  {
-    name: 'StellarSkiesAstronomy.org',
-    desc: 'An educational site dedicated to astronomy, providing resources for amateur astronomers, star maps, and information on celestial events.',
-    url: '/projects/image-9.jpg',
-    tech: ['ReactJS', 'JavaScript', 'ThreeJS'],
-  },
-  {
-    name: 'UrbanEatsDelights.com',
-    desc: 'An educational site dedicated to astronomy, providing resources for amateur astronomers, star maps, and information on celestial events.',
-    url: '/projects/image-10.jpg',
-    tech: ['NextJS', 'ThreeJS'],
+    name: 'Web Portfolio',
+    summary:
+      'Personal portfolio website built with modern web technologies to present projects, experience, and technical profile.',
+    highlights: [
+      'Designed and implemented a responsive UI with structured content and clear information hierarchy.',
+      'Customized beyond the original course baseline with additional sections, improved layout, and tailored content.',
+      'Focused on performance, maintainability, and clean component architecture.',
+    ],
+    image: '/projects/image-8.jpg',
+    domain: 'Web',
+    source: 'course',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
+    repoUrl:
+      'https://www.udemy.com/course/build-portfolio-with-nextjs-framer-motion-tailwind-css/',
+    status: 'completed',
   },
 ]
 
-export const projectsButton = [
+export const projectDomains = [
   'All',
-  'Figma',
-  'Photoshop',
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'ReactJS',
-  'TailwindCSS',
-  'NextJS',
-  'FramerMotion',
-  'ThreeJS',
+  'Web',
+  'Mobile',
+  'Fullstack',
+  'Backend',
+  'AI',
+  'IoT',
+  'Research',
 ]
 
 // Pricing Plans
 export const pricingPlans = [
   {
-    title: 'Basic',
+    title: 'Website Dev. - Basic',
     pricing: '$500 - $1,000',
     features: [
       'Up to 5 pages',
@@ -347,7 +414,7 @@ export const pricingPlans = [
     recommended: 'Small businesses, personal websites, bloggers',
   },
   {
-    title: 'Premium',
+    title: 'Website Dev. - Premium',
     pricing: '$5,000 - $10,000',
     features: [
       'Unlimited pages',
@@ -364,7 +431,7 @@ export const pricingPlans = [
     recommended: 'Medium-sized businesses, online stores, service providers',
   },
   {
-    title: 'Standard',
+    title: 'Website Dev. - Standard',
     pricing: '$1,500 - $3,000',
     features: [
       'Up to 10 pages',

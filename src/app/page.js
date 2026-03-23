@@ -42,9 +42,9 @@ export default function Home() {
           <Hero />
           <About />
           <Experience />
-          <Skills />
-          <Reviews />
           <Projects />
+          
+          <Reviews />
           <PricingPlans />
           <Contact />
           <Questions />
