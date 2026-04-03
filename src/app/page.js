@@ -12,6 +12,7 @@ import NavBar from '@/components/NavBar';
 import { useEffect, useRef, useState } from 'react';
 import Toggle from '@/components/sub/Toggle';
 import Load from '@/components/sub/Load';
+import Services from '@/components/Services';
 
 export default function Home() {
   const [id, setId ] = useState(0);
@@ -43,8 +44,7 @@ export default function Home() {
           <About />
           <Experience />
           <Projects />
-          
-          <Reviews />
+          <Services />
           <PricingPlans />
           <Contact />
           <Questions />
