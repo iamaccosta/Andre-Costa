@@ -14,7 +14,7 @@ const OnlineShop = () => {
                 transition={{ duration: 0.5, ease: 'easeInOut' }}
                 className="w-full h-full flex items-center justify-center space-x-2"
             >
-                <h1>Online Shop</h1>
+                <h1>Your Online Shop</h1>
                 {storeIcon} 
             </motion.div>              
         </div>
