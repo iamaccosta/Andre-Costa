@@ -3,7 +3,6 @@ import InstagramLineIcon from 'remixicon-react/InstagramLineIcon'
 import LinkedInCircleLineIcon from 'remixicon-react/LinkedinLineIcon'
 import GithubLineIcon from 'remixicon-react/GithubLineIcon'
 
-/* eslint-disable react/jsx-key */
 export const heroIcons = [
   {
     icon: <InstagramLineIcon />,
@@ -17,6 +16,20 @@ export const heroIcons = [
     icon: <GithubLineIcon />,
     link: 'https://github.com/iamaccosta'
   },
+]
+
+export const heroRoles = [
+  "Software Engineer",
+  "Full-Stack Developer",
+  "IIoT Researcher",
+  "UI / UX Enthusiast",
+]
+
+export const heroTechBadges = [
+  { label: "React",      color: "#61dafb", style: { top: "-16px",   left: "18px"    } },
+  { label: "Next.js",    color: "#e4e4e7", style: { top: "10%",     right: "-22px"  } },
+  { label: "Tailwind",   color: "#38bdf8", style: { bottom: "12%",  right: "-26px"  } },
+  { label: "Node.js",    color: "#6abf69", style: { bottom: "-14px",left: "22%"     } },
 ]
 
 // About Me
@@ -53,6 +66,28 @@ import ArrowLeftSFillIcon from 'remixicon-react/ArrowLeftSFillIcon'
 
 export const downloadIcon = <DownloadLineIcon />
 export const arrowLeftIcon = <ArrowLeftSFillIcon />
+
+// Experience
+import BookOpenLineIcon from 'remixicon-react/BookOpenLineIcon'
+import Building2LineIcon from 'remixicon-react/Building2LineIcon'
+import FlaskLineIcon from 'remixicon-react/FlaskLineIcon'
+import Medal2FillIcon from 'remixicon-react/Medal2FillIcon'
+
+export const experienceIcons = {
+  education: <BookOpenLineIcon />,
+  work:      <Building2LineIcon />,
+  research:  <FlaskLineIcon />,
+  award:     <Medal2FillIcon />,
+}
+
+export const aboutHighlights = [
+  "Full-Stack Development",
+  "IIoT & Digital Twins",
+  "Software Architecture",
+  "REST API Design",
+  "React & Next.js",
+  "Research & Innovation",
+]
 
 // About Me
 export const aboutText = "I'm André Costa, an Informatics and Computing Engineer with a strong focus on building production-grade software and scalable systems. Currently working as a Junior Researcher at INESC TEC, I develop Digital Twin solutions using Asset Administration Shell (AAS) and IIoT architectures, bridging research with real industrial applications.\n\nI have a solid background in full-stack development and software architecture, with hands-on experience across modern technologies including React, Node.js, Docker, and data-driven systems. I approach engineering with precision and ownership, aiming not just to write code, but to design reliable, maintainable solutions that deliver real impact.\n\nDriven by continuous improvement, I invest heavily in learning, personal projects, and refining both technical and problem-solving skills—always pushing to operate at a higher level each iteration."
@@ -209,11 +244,20 @@ import StoreIcon from 'remixicon-react/StoreLineIcon'
 export const storeIcon = <StoreIcon />
 
 // Services
+import CodeBoxLineIcon   from 'remixicon-react/CodeBoxLineIcon'
+import ServerLineIcon    from 'remixicon-react/ServerLineIcon'
+import Layout3LineIcon   from 'remixicon-react/Layout3LineIcon'
+import SmartphoneLineIcon from 'remixicon-react/SmartphoneLineIcon'
+import DatabaseLineIcon  from 'remixicon-react/DatabaseLineIcon'
+import BugLineIcon       from 'remixicon-react/BugLineIcon'
+import PaintBrushLineIcon from 'remixicon-react/PaintBrushLineIcon'
+
 export const servicesData = [
   {
     title: 'Web Development',
     subtitle: 'Responsive, modern web applications',
-    visual: '/services/web-dev.gif',
+    icon: <CodeBoxLineIcon />,
+    accent: '#f59e0b',
     description:
       'Design and develop responsive web applications with clean architecture and performance in mind. Focused on usability, maintainability, and scalable frontend structures.',
     tech: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
@@ -221,7 +265,8 @@ export const servicesData = [
   {
     title: 'Backend & APIs',
     subtitle: 'Robust and scalable backend services',
-    visual: '/services/backend.gif',
+    icon: <ServerLineIcon />,
+    accent: '#10b981',
     description:
       'Design and implement backend systems and RESTful APIs to support web and mobile applications. Emphasis on data integrity, performance, and clear service architecture.',
     tech: ['Node.js', 'Spring Boot', 'REST APIs', 'SQL'],
@@ -229,7 +274,8 @@ export const servicesData = [
   {
     title: 'Full-Stack Development',
     subtitle: 'End-to-end application development',
-    visual: '/services/fullstack.gif',
+    icon: <Layout3LineIcon />,
+    accent: '#818cf8',
     description:
       'Build complete applications from frontend to backend, ensuring seamless integration between components and consistent data flow across the system.',
     tech: ['React', 'Node.js', 'Next.js', 'SQL'],
@@ -237,7 +283,8 @@ export const servicesData = [
   {
     title: 'Mobile Applications',
     subtitle: 'Android apps for real-world use',
-    visual: '/services/mobile.gif',
+    icon: <SmartphoneLineIcon />,
+    accent: '#34d399',
     description:
       'Develop Android applications with structured architecture and user-focused design, tailored for practical use cases and consistent performance.',
     tech: ['Kotlin', 'Android'],
@@ -245,7 +292,8 @@ export const servicesData = [
   {
     title: 'Database Design',
     subtitle: 'Structured and efficient data systems',
-    visual: '/services/database.gif',
+    icon: <DatabaseLineIcon />,
+    accent: '#60a5fa',
     description:
       'Design relational database schemas and optimize data storage solutions to ensure consistency, scalability, and efficient querying.',
     tech: ['PostgreSQL', 'MySQL', 'SQL'],
@@ -253,7 +301,8 @@ export const servicesData = [
   {
     title: 'Bug Fixing & Optimization',
     subtitle: 'Debugging, refactoring, and performance improvements',
-    visual: '/services/debugging.gif',
+    icon: <BugLineIcon />,
+    accent: '#f87171',
     description:
       'Identify, debug, and resolve issues in existing applications. Improve code quality, fix performance bottlenecks, and ensure system stability.',
     tech: ['Debugging', 'Code Review', 'Performance Optimization'],
@@ -261,10 +310,39 @@ export const servicesData = [
   {
     title: 'UI Implementation',
     subtitle: 'Clean and responsive user interfaces',
-    visual: '/services/ui.gif',
+    icon: <PaintBrushLineIcon />,
+    accent: '#c084fc',
     description:
       'Translate designs into responsive and consistent user interfaces, focusing on layout precision, responsiveness, and user experience.',
     tech: ['HTML', 'CSS', 'Tailwind CSS', 'React'],
+  },
+]
+
+export const serviceDemos = [
+  {
+    key: 'portfolio',
+    label: 'Portfolio Website',
+    description: 'A personal showcase site — hero section, animated role cycling, social links, and a smooth scroll experience.',
+  },
+  {
+    key: 'gallery',
+    label: 'Digital Gallery',
+    description: 'A filterable media gallery with category pills, search, and card hover interactions.',
+  },
+  {
+    key: 'shop',
+    label: 'Online Shop',
+    description: 'A product page with color selector, quantity control, add-to-cart feedback, and wishlist toggle.',
+  },
+  {
+    key: 'menu',
+    label: 'Restaurant Menu',
+    description: 'A categorized restaurant menu with item cards, dietary tags, and a clean ordering UI.',
+  },
+  {
+    key: 'business',
+    label: 'Business Website',
+    description: 'A corporate landing page with navbar, hero headline, stats row, and a services grid.',
   },
 ]
 
@@ -425,59 +503,92 @@ export const projectDomains = [
   'Research',
 ]
 
+import ExternalLinkLineIcon from 'remixicon-react/ExternalLinkLineIcon'
+import GithubFill2Icon from 'remixicon-react/GithubFillIcon'
+
+export const projectLinkIcon = <ExternalLinkLineIcon />
+export const projectGithubIcon = <GithubFill2Icon />
+
+export const projectStatusConfig = {
+  completed:   { label: 'Completed',   color: '#10b981', bg: 'rgba(16,185,129,0.10)' },
+  prototype:   { label: 'Prototype',   color: '#f59e0b', bg: 'rgba(245,158,11,0.10)' },
+  'in-progress': { label: 'In Progress', color: '#818cf8', bg: 'rgba(129,140,248,0.10)' },
+}
+
+export const projectSourceConfig = {
+  academic:     { label: 'Academic',     color: '#60a5fa' },
+  professional: { label: 'Professional', color: '#34d399' },
+  course:       { label: 'Course',       color: '#f472b6' },
+}
+
 // Pricing Plans
+import CheckLineIcon    from 'remixicon-react/CheckLineIcon'
+import RocketLineIcon   from 'remixicon-react/RocketLineIcon'
+import AwardLineIcon    from 'remixicon-react/AwardLineIcon'
+import VipCrownLineIcon from 'remixicon-react/VipCrownLineIcon'
+
+export const checkIcon = <CheckLineIcon />
+
 export const pricingPlans = [
   {
-    title: 'Website Dev. - Basic',
-    pricing: '$500 - $1,000',
+    tier: 'Basic',
+    title: 'Website Dev. — Basic',
+    pricing: '$400 – $800',
+    icon: <RocketLineIcon />,
+    accent: '#f59e0b',
+    isPopular: false,
     features: [
       'Up to 5 pages',
-      'Responsive design ',
-      'Basic SEO ',
+      'Responsive design',
+      'Basic SEO',
       'Contact form',
       'Social media links',
-      '1 month support',
+      '1 month of support',
     ],
-    recommended: 'Small businesses, personal websites, bloggers',
+    recommended: 'Personal websites, bloggers, small local businesses',
   },
   {
-    title: 'Website Dev. - Premium',
-    pricing: '$5,000 - $10,000',
+    tier: 'Standard',
+    title: 'Website Dev. — Standard',
+    pricing: '$1,200 – $2,200',
+    icon: <AwardLineIcon />,
+    accent: '#ef4444',
+    isPopular: true,
+    features: [
+      'Up to 10 pages',
+      'Responsive design',
+      'Advanced SEO',
+      'Contact form',
+      'Social media links',
+      'E-commerce (up to 20 products)',
+      'Blog setup',
+      'Google Analytics',
+      '3 months of support',
+    ],
+    recommended: 'Growing businesses, service providers, online stores',
+  },
+  {
+    tier: 'Premium',
+    title: 'Website Dev. — Premium',
+    pricing: '$3,500 – $7,000',
+    icon: <VipCrownLineIcon />,
+    accent: '#818cf8',
+    isPopular: false,
     features: [
       'Unlimited pages',
       'Responsive design',
       'Comprehensive SEO',
-      'Contact form ',
+      'Contact form',
       'Social media links',
       'Advanced security',
       'E-commerce (unlimited products)',
       'Blog setup',
       'Google Analytics with custom reports',
-      '6 months support',
+      '6 months of support',
     ],
-    recommended: 'Medium-sized businesses, online stores, service providers',
-  },
-  {
-    title: 'Website Dev. - Standard',
-    pricing: '$1,500 - $3,000',
-    features: [
-      'Up to 10 pages',
-      'Responsive design',
-      'Advanced SEO',
-      'CContact form',
-      'Social media links',
-      'E-commerce (20 products)',
-      'Blog setup',
-      'Google Analytics',
-      '3 months support',
-    ],
-    recommended: 'Large businesses, complex e-commerce sites, custom web applications',
+    recommended: 'Large businesses, enterprises, complex web applications',
   },
 ]
-
-import CheckLineIcon from 'remixicon-react/CheckLineIcon'
-
-export const checkIcon = <CheckLineIcon />
 
 // Q & A
 export const questions = [

@@ -1,59 +1,71 @@
 'use client'
-import { useState } from 'react';
-import { questionArrow } from '@/assets';
-import { motion } from 'framer-motion';
 
-const Question = ({question_data, index}) => {
-    const [clicked, setClicked] = useState(false);
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
-    const variants = {
-        visible: (i) => ({
-            opacity: 1,
-            x: 0,
-            transition: {
-                delay: i * 0.05,
-                duration: 0.4
-            }
-        }),
-        hidden: { opacity: 0.7, x: 50 }
-    }
+const Question = ({ question_data, index }) => {
+    const [open, setOpen] = useState(false)
 
     return (
-        <motion.li 
-            variants={variants}
-            custom={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ margin:'50px', once: true }}
-            className="border border-yellow-500 p-1 rounded-lg">
-            <h1 
-                className={`flex items-center text-xl font-extralight text-gray-800 dark:text-white transition-colors dark:hover:text-yellow-600 tracking-wide cursor-pointer hover:text-yellow-600 ${clicked ? 'border-b text-yellow-600' : ''}`}
-                onClick={() => 
-                    setClicked(!clicked)
-                }    
+        <motion.li
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '40px' }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: index * 0.04 }}
+            className={[
+                "rounded-xl border transition-colors duration-200 overflow-hidden",
+                open
+                    ? "border-amber-400/60 dark:border-amber-500/50 bg-zinc-50 dark:bg-zinc-800/60"
+                    : "border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-600",
+            ].join(' ')}
+        >
+            {/* Header row */}
+            <button
+                onClick={() => setOpen(!open)}
+                className="w-full flex items-center gap-4 px-5 py-4 text-left"
             >
-                <motion.span 
-                    animate={{ rotate: clicked ? 0 : -90 }}
-                    transition={{ duration: 0.1}}
-                >{questionArrow}
+                {/* Number badge */}
+                <span
+                    className="shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-[10px] font-bold text-white"
+                    style={{ background: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)" }}
+                >
+                    {index + 1}
+                </span>
+
+                {/* Question text */}
+                <span className="flex-1 text-sm font-semibold tracking-wide text-zinc-800 dark:text-zinc-100">
+                    {question_data.question}
+                </span>
+
+                {/* Chevron */}
+                <motion.span
+                    animate={{ rotate: open ? 180 : 0 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="shrink-0 text-zinc-400 dark:text-zinc-500"
+                >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                 </motion.span>
-                <span>{question_data.question}</span>
-            </h1>
-            {
-                clicked && 
-                <motion.p 
-                    initial={{ scaleY: 0, opacity: 0, height: 0 }}
-                    animate={{ scaleY: clicked ? 1 : 0, opacity: clicked ? 1 : 0, height: clicked ? 'auto' : 0 }}
-                    transition={{ 
-                        duration: 0.1, 
-                        type: "spring", 
-                        stiffness: clicked ? 250 : 50, 
-                        opacity: { delay: clicked ? 0.2: 0 }
-                    }}
-                    className="box-border origin-top pl-8 text-lg font-extralight tracking-wide text-gray-900 first-letter:pl-3 dark:text-gray-200 transition-colors">
-                    {question_data.answer}
-                </motion.p>
-            }
+            </button>
+
+            {/* Answer — animated expand/collapse */}
+            <AnimatePresence initial={false}>
+                {open && (
+                    <motion.div
+                        key="answer"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ overflow: 'hidden' }}
+                    >
+                        <p className="px-5 pb-5 pl-15 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 border-t border-zinc-100 dark:border-zinc-700/60 pt-3">
+                            {question_data.answer}
+                        </p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.li>
     )
 }
