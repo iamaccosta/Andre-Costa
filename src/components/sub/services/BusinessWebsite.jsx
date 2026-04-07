@@ -249,14 +249,9 @@ const ServicesGrid = () => (
 
 const BusinessWebsite = () => (
     <div
-        className="w-full h-full flex flex-col overflow-hidden rounded-2xl"
+        className="w-full h-full flex flex-col overflow-hidden"
         style={{ background: "#f8fafc" }}
     >
-        {/* Subtle top gradient accent */}
-        <div
-            className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
-            style={{ background: "linear-gradient(90deg, #10b981 0%, #34d399 50%, #6ee7b7 100%)" }}
-        />
 
         <Navbar />
 

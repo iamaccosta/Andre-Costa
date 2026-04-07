@@ -62,7 +62,7 @@ const GalleryCard = ({ item }) => {
                     sizes="(max-width: 768px) 50vw, 33vw"
                 />
                 {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-cyan-950/90 via-cyan-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-linear-to-t from-cyan-950/90 via-cyan-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Card footer on hover */}
                 <div className="absolute inset-0 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -115,16 +115,16 @@ const Gallery = () => {
                 initial={{ y: -16, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-white/8 flex-shrink-0 gap-3"
+                className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-white/8 shrink-0 gap-3"
             >
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                     <h1 className="text-white text-lg font-semibold tracking-tight">Your Gallery</h1>
                     <p className="text-cyan-400/50 text-xs mt-0.5">{galleryItems.length} assets</p>
                 </div>
 
                 {/* Search */}
                 <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 min-w-0 flex-1 max-w-40 focus-within:border-cyan-500/40 transition-colors duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 text-cyan-400/40 flex-shrink-0" viewBox="0 0 24 24"
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 text-cyan-400/40 shrink-0" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
                     </svg>
@@ -138,7 +138,7 @@ const Gallery = () => {
                 </div>
 
                 {/* Upload */}
-                <button className="flex items-center gap-1.5 px-3 py-2 bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-cyan-950 text-xs font-semibold rounded-lg transition-all duration-200 flex-shrink-0">
+                <button className="flex items-center gap-1.5 px-3 py-2 bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-cyan-950 text-xs font-semibold rounded-lg transition-all duration-200 shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19" /><polyline points="5 12 12 5 19 12" />
@@ -152,7 +152,7 @@ const Gallery = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.12, duration: 0.3 }}
-                className="flex items-center gap-1 px-5 py-3 flex-shrink-0"
+                className="flex items-center gap-1 px-5 py-3 shrink-0"
             >
                 {categories.map(cat => (
                     <button

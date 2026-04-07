@@ -28,7 +28,7 @@ const Services = () => {
     [services.length]);
 
     useEffect(() => {
-        const id = setInterval(next, 50000);
+        const id = setInterval(next, 500000);
         return () => clearInterval(id);
     }, [next]);
 
