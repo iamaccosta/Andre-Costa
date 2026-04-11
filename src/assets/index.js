@@ -1,4 +1,19 @@
-// Hero
+// ─── Shared animation variants ───────────────────────────────────────────────
+// Import these instead of defining locally in each component.
+
+export const easeSmooth = [0.22, 1, 0.36, 1]
+
+export const fadeUp = {
+    hidden:  { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeSmooth } },
+}
+
+export const stagger = {
+    hidden:  {},
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+}
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
 import InstagramLineIcon from 'remixicon-react/InstagramLineIcon'
 import LinkedInCircleLineIcon from 'remixicon-react/LinkedinLineIcon'
 import GithubLineIcon from 'remixicon-react/GithubLineIcon'
@@ -109,7 +124,7 @@ export const experienceData = [
     year: 2020,
     title: 'Electrical and Computer Engineering - 1st Year',
     education:
-      'Completed the 1st year of the Integrated Master’s in Electrical and Computer Engineering at FEUP, Porto, Portugal.',
+      'Completed the 1st year of the Integrated Master\'s in Electrical and Computer Engineering at FEUP, Porto, Portugal.',
     experience: [
       'Developed core engineering fundamentals in mathematics, physics, and computational thinking.',
       'Strengthened programming foundations through work in Assembly and C.',
@@ -247,7 +262,6 @@ export const storeIcon = <StoreIcon />
 import CodeBoxLineIcon   from 'remixicon-react/CodeBoxLineIcon'
 import ServerLineIcon    from 'remixicon-react/ServerLineIcon'
 import Layout3LineIcon   from 'remixicon-react/Layout3LineIcon'
-import SmartphoneLineIcon from 'remixicon-react/SmartphoneLineIcon'
 import DatabaseLineIcon  from 'remixicon-react/DatabaseLineIcon'
 import BugLineIcon       from 'remixicon-react/BugLineIcon'
 import PaintBrushLineIcon from 'remixicon-react/PaintBrushLineIcon'
@@ -279,15 +293,6 @@ export const servicesData = [
     description:
       'Build complete applications from frontend to backend, ensuring seamless integration between components and consistent data flow across the system.',
     tech: ['React', 'Node.js', 'Next.js', 'SQL'],
-  },
-  {
-    title: 'Mobile Applications',
-    subtitle: 'Android apps for real-world use',
-    icon: <SmartphoneLineIcon />,
-    accent: '#34d399',
-    description:
-      'Develop Android applications with structured architecture and user-focused design, tailored for practical use cases and consistent performance.',
-    tech: ['Kotlin', 'Android'],
   },
   {
     title: 'Database Design',
@@ -361,56 +366,7 @@ export const reviewsData = []
 // Projects
 export const projectsData = [
   {
-    name: 'Hotel? Privago',
-    summary:
-      'Full-stack hotel search and information system designed to aggregate, query, and present global hospitality data.',
-    highlights: [
-      'Designed and implemented a structured backend for managing hotel data, search queries, and filtering logic.',
-      'Developed a responsive frontend focused on usability and efficient data exploration.',
-      'Handled integration between frontend and backend layers, ensuring consistent data flow and performance.',
-    ],
-    image: '/projects/image-1.jpg',
-    domain: 'Fullstack',
-    source: 'academic',
-    tech: ['Python', 'SOLR', 'HTML', 'CSS', 'JavaScript', 'Node.js'],
-    repoUrl: 'https://github.com/Fabio-A-Sa/Privago',
-    status: 'completed',
-  },
-  {
-    name: 'HandiMarket',
-    summary:
-      'Marketplace platform designed to support accessible commerce, focusing on usability and inclusive interaction patterns.',
-    highlights: [
-      'Implemented core marketplace features including product management, user interaction, and transactional flows.',
-      'Focused on accessibility considerations and user-centric design principles.',
-      'Collaborated in a team environment, contributing to both frontend and backend components.',
-    ],
-    image: '/projects/image-2.jpg',
-    domain: 'Fullstack',
-    source: 'academic',
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'SQL'],
-    repoUrl: 'https://github.com/LGP-FEUP-2024/SC25/tree/main',
-    status: 'completed',
-  },
-  {
-    name: 'OnlyFEUP',
-    summary:
-      'Social network platform tailored for FEUP students, enabling communication, content sharing, and community interaction.',
-    highlights: [
-      'Designed relational database schema to support user profiles, posts, and interactions.',
-      'Implemented backend logic for authentication, data persistence, and social features.',
-      'Integrated frontend and backend components into a cohesive full-stack application.',
-    ],
-    image: '/projects/image-3.jpg',
-    domain: 'Fullstack',
-    source: 'academic',
-    tech: ['HTML', 'Laravel', 'PHP', 'SQL'],
-    repoUrl:
-      'https://github.com/Fabio-A-Sa/Y3S1-LabDBWeb/tree/main/Project',
-    status: 'completed',
-  },
-  {
-    name: 'Master Dissertation – Digital Twins in Industrial Environments',
+    name: 'Master Dissertation - Digital Twins in Industrial Environments',
     summary:
       'Research work focused on the application of standardized Digital Twins using Asset Administration Shell (AAS) in industrial production environments.',
     highlights: [
@@ -418,10 +374,9 @@ export const projectsData = [
       'Applied Asset Administration Shell (AAS) concepts to represent and manage industrial assets.',
       'Explored integration of IIoT systems, communication protocols, and data pipelines for real-world scenarios.',
     ],
-    image: '/projects/image-4.jpg',
     domain: 'Research',
     source: 'academic',
-    tech: ['AAS', 'MQTT', 'Kafka', 'IIoT'],
+    tech: ['AAS', 'MQTT', 'Kafka', 'Grafana', 'IIoT'],
     repoUrl:
       'https://repositorio-aberto.up.pt/handle/10216/169157',
     status: 'completed',
@@ -435,10 +390,9 @@ export const projectsData = [
       'Integrated industrial communication protocols to support real-time data acquisition and control.',
       'Enabled monitoring and remote operation of industrial assets through a Digital Twin abstraction layer.',
     ],
-    image: '/projects/image-5.jpg',
     domain: 'IoT',
     source: 'professional',
-    tech: ['Java', 'Spring Boot', 'AAS', 'PLC', 'REST'],
+    tech: ['Java', 'Spring Boot', 'AAS', 'PLC Drivers', 'REST'],
     status: 'prototype',
   },
   {
@@ -450,7 +404,6 @@ export const projectsData = [
       'Applied Digital Twin concepts to non-traditional industrial domains (aquaculture).',
       'Contributed to structuring data models and semantic representations for biological production systems.',
     ],
-    image: '/projects/image-6.jpg',
     domain: 'Research',
     source: 'professional',
     tech: ['AAS', 'Digital Twins', 'IIoT'],
@@ -465,12 +418,9 @@ export const projectsData = [
       'Extended beyond course baseline by adapting features to real personal use cases.',
       'Focused on usability and consistency for day-to-day usage in training routines.',
     ],
-    image: '/projects/image-7.jpg',
     domain: 'Mobile',
     source: 'course',
     tech: ['Kotlin', 'Android'],
-    repoUrl:
-      'https://www.udemy.com/course/android-kotlin-developer/',
     status: 'completed',
   },
   {
@@ -482,7 +432,6 @@ export const projectsData = [
       'Customized beyond the original course baseline with additional sections, improved layout, and tailored content.',
       'Focused on performance, maintainability, and clean component architecture.',
     ],
-    image: '/projects/image-8.jpg',
     domain: 'Web',
     source: 'course',
     tech: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
@@ -491,6 +440,16 @@ export const projectsData = [
     status: 'completed',
   },
 ]
+
+export const projectDomainConfig = {
+  Web:       { color: '#3b82f6', icon: '🌐' },
+  Mobile:    { color: '#8b5cf6', icon: '📱' },
+  Fullstack: { color: '#f59e0b', icon: '⚡' },
+  Backend:   { color: '#10b981', icon: '🗄️' },
+  AI:        { color: '#ec4899', icon: '🤖' },
+  IoT:       { color: '#06b6d4', icon: '📡' },
+  Research:  { color: '#6366f1', icon: '🔬' },
+}
 
 export const projectDomains = [
   'All',
@@ -533,7 +492,7 @@ export const pricingPlans = [
   {
     tier: 'Basic',
     title: 'Website Dev. — Basic',
-    pricing: '$400 – $800',
+    pricing: '$400 - $800',
     icon: <RocketLineIcon />,
     accent: '#f59e0b',
     isPopular: false,
@@ -550,7 +509,7 @@ export const pricingPlans = [
   {
     tier: 'Standard',
     title: 'Website Dev. — Standard',
-    pricing: '$1,200 – $2,200',
+    pricing: '$1,200 - $2,200',
     icon: <AwardLineIcon />,
     accent: '#ef4444',
     isPopular: true,
@@ -570,7 +529,7 @@ export const pricingPlans = [
   {
     tier: 'Premium',
     title: 'Website Dev. — Premium',
-    pricing: '$3,500 – $7,000',
+    pricing: '$3,500 - $7,000',
     icon: <VipCrownLineIcon />,
     accent: '#818cf8',
     isPopular: false,
@@ -593,59 +552,28 @@ export const pricingPlans = [
 // Q & A
 export const questions = [
   {
-    question: 'How much do you charge for a website?',
-    answer:
-      'Our website packages usually range from £2997 – £4997. However it really depends on what kind of website you need. We recently wrote a full guide on how much it costs for a website to give you an idea of the different options available.',
+    question: "How do we communicate throughout the project?",
+    answer: "Before we start, we have a discovery call to align on scope and expectations. During the build, communication takes place primarily over email or messaging, keeping everything written and trackable. I provide regular progress updates and welcome feedback at each milestone.",
   },
   {
-    question: 'Why are you so expensive?',
-    answer:
-      'he process we use to build your website takes a certain amount of time and a lot of planning and research. Unlike other agencies, we DON’T use templates. We build your website from scratch, which means you get a unique design tailored around your business. Buying a website from us should not just simply be seen as a business expense as your website is a sales tool that should earn you money',
+    question: "How long does it take to build a website?",
+    answer: "It typically takes 4 to 8 weeks from kickoff to delivery, depending on the complexity and scope. The timeline is heavily influenced by how quickly content, assets, and feedback are provided on your side. I will always give you a clear estimate before we begin.",
   },
   {
-    question: 'How long does it take to build a website?',
-    answer:
-      'It takes approximately 6-10 weeks to build a website from start to finish, providing we have all the information from you. Our full web design process is broken down here. Generally speaking, the website will only take a long time if we are still waiting for text and images from yourself.',
+    question: "What do you need from me to get started?",
+    answer: "To kick off the project I need a clear brief covering your goals, target audience, and any design references you like. Depending on the scope, I may also need copy (text), images or brand assets, and access to any existing tools or platforms you use.",
   },
   {
-    question: 'How do we communicate throughout the website build?',
-    answer:
-      'Before we begin working together, we’ll usually have an initially chat on the phone or via Skype to discuss the project. Once we get started, most of the communication will take place over email. This makes the process a lot easier as we’ll have all of the information saved and can come back to it later. Once we’ve finished the project, we will book in your 1hr digital marketing training session.',
+    question: "Who hosts the website and handles deployment?",
+    answer: "I handle the full deployment process. For most projects I recommend Vercel or Netlify, both are fast, reliable, and have generous free tiers. If you already have a preferred hosting provider, I can work with that too. You will always have full ownership and access to your infrastructure.",
   },
   {
-    question: 'What will you need from me?',
-    answer:
-      'It really depends on what type of website you want. We’ll be able to discuss this on our discovery call before we start working together. Depending on which package we agree on we could need…',
+    question: "Can I update the website myself after it is delivered?",
+    answer: "Yes. I build with maintainability in mind and can integrate a CMS (like Sanity or Contentful) so you can manage content without touching code. I also provide a handover walkthrough so you feel confident making day-to-day edits on your own.",
   },
   {
-    question: 'What if I don’t like the website?',
-    answer:
-      'You’re in luck. We offer a risk-free guarantee. Before we build your new website, we’ll design a mockup of your homepage. We’ll design a layout in Photoshop first, that way you’ll get to see our initial designs within approximately ten days. This is your opportunity to give us feedback and if you really don’t like it, you don’t have to move forward. Best part is, this won’t cost you anything.',
-  },
-  {
-    question: 'Do you offer a payment schedule?',
-    answer:
-      'Yes, we split the payment into two. The first 50% is usually taken once you have seen the mockup of your homepage and you’re happy to move forward. The following 50% is taken 30 days after this.',
-  },
-  {
-    question: 'Can I make the final payment when the site is ready to go live?',
-    answer:
-      'No. In the past we have found that projects can take a lot longer than expected to complete. We might be waiting for information from you and this can delay the process. Sometimes these delays can take months. This is why we always invoice 30 days after the original payment. At this point we’ll be well on our way with your new website and you’ll be able to see the progress.',
-  },
-  {
-    question: 'Who hosts the website?',
-    answer:
-      'If we build your website, we will generally manage the hosting for you so you don’t need to do anything. We use the same hosting company for our own website and for ALL our clients. Each website is managed individually to avoid any security issues. Every website we build has unlimited bandwidth, 20GB of disk space, 2GB Ram and 99.9% uptime. We’ve used the same company for 5 years and we don’t plan on changing this anytime soon.',
-  },
-  {
-    question: 'Can I update the website myself once it’s been built?',
-    answer:
-      'Yes. We like to offer the ability for our clients to update the website themselves. We we’ll give you all the training and tools to be able to make website amendments. We use a easy to use platform called WordPress so you can add edit and delete content without paying us to do it for you.',
-  },
-  {
-    question: 'What if I don’t want to manage the website at all. Can you do it all for me?',
-    answer:
-      'Yes, we can arrange a maintenance package to suit your needs. This can range from 1hr per month to 10 hours per month and we can discuss a package that’s right for you.',
+    question: "What happens if I am not happy with the result?",
+    answer: "Satisfaction is a priority. I share design mockups and work-in-progress previews before full implementation, so you can give feedback early. If something does not meet expectations after delivery, I offer a revision round to address it. The goal is always a result you are proud of.",
   },
 ]
 
@@ -657,62 +585,26 @@ import CopyrightLineIcon from 'remixicon-react/CopyrightLineIcon'
 
 export const copyRightIcon = <CopyrightLineIcon />
 
-import Home5LineIcon from 'remixicon-react/Home5LineIcon'
-import UserLineIcon from 'remixicon-react/UserLineIcon'
-import HistoryLineIcon from 'remixicon-react/HistoryLineIcon'
-import BriefcaseLineIcon from 'remixicon-react/BriefcaseLineIcon'
-import UserStarLineIcon from 'remixicon-react/UserStarLineIcon'
-import ProjectorLineIcon from 'remixicon-react/ProjectorLineIcon'
-import PriceTag3LineIcon from 'remixicon-react/PriceTag3LineIcon'
-import ContactsBook2LineIcon from 'remixicon-react/ContactsBook2LineIcon'
-import QuestionAnswerLineIcon from 'remixicon-react/QuestionAnswerLineIcon'
+import Home5LineIcon       from 'remixicon-react/Home5LineIcon'
+import UserLineIcon         from 'remixicon-react/UserLineIcon'
+import RoadMapLineIcon      from 'remixicon-react/RoadMapLineIcon'
+import Folder3LineIcon      from 'remixicon-react/Folder3LineIcon'
+import BriefcaseLineIcon    from 'remixicon-react/BriefcaseLineIcon'
+import PriceTag3LineIcon    from 'remixicon-react/PriceTag3LineIcon'
+import MailLineIcon         from 'remixicon-react/MailLineIcon'
+import QuestionLineIcon     from 'remixicon-react/QuestionLineIcon'
+// Reserved for future sections (Skills, Reviews)
+export { default as CpuLineIcon }       from 'remixicon-react/CpuLineIcon'
+export { default as ChatQuoteLineIcon } from 'remixicon-react/ChatQuoteLineIcon'
 
 export const navbarData = [
-  {
-    id: 'home',
-    name: 'Home',
-    icon: <Home5LineIcon />,
-  },
-  {
-    id: 'about',
-    name: 'About',
-    icon: <UserLineIcon />,
-  },
-  {
-    id: 'experience',
-    name: 'MyRoad',
-    icon: <HistoryLineIcon />,
-  },
-  {
-    id: 'skills',
-    name: 'Skills',
-    icon: <BriefcaseLineIcon />,
-  },
-  {
-    id: 'reviews',
-    name: 'Reviews',
-    icon: <UserStarLineIcon />,
-  },
-  {
-    id: 'projects',
-    name: 'Projects',
-    icon: <ProjectorLineIcon />,
-  },
-  {
-    id: 'pricing',
-    name: 'Pricing',
-    icon: <PriceTag3LineIcon />,
-  },
-  {
-    id: 'contact',
-    name: 'Contact',
-    icon: <ContactsBook2LineIcon />,
-  },
-  {
-    id: 'questions',
-    name: 'Questions',
-    icon: <QuestionAnswerLineIcon />,
-  },
+  { id: 'home',       name: 'Home',      icon: <Home5LineIcon />      },
+  { id: 'about',      name: 'About',     icon: <UserLineIcon />       },
+  { id: 'experience', name: 'MyRoad',    icon: <RoadMapLineIcon />    },
+  { id: 'projects',   name: 'Projects',  icon: <Folder3LineIcon />    },
+  { id: 'services',   name: 'Services',  icon: <BriefcaseLineIcon />  },
+  { id: 'contact',    name: 'Contact',   icon: <MailLineIcon />       },
+  { id: 'questions',  name: 'FAQ',       icon: <QuestionLineIcon />   },
 ]
 
 // Toggle

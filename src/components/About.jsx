@@ -3,21 +3,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Heading from './sub/Heading';
 import Achievements from './sub/Achievements';
-import { aboutData, aboutText, aboutHighlights, downloadIcon } from '@/assets';
-
-// ─── Animation helpers ────────────────────────────────────────────────────────
-
-const stagger = {
-    hidden:  {},
-    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
-};
-
-const fadeUp = {
-    hidden:  { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-};
-
-// ─── Component ────────────────────────────────────────────────────────────────
+import PhotoFrame from './sub/PhotoFrame';
+import { aboutData, aboutText, aboutHighlights, downloadIcon, fadeUp, stagger } from '@/assets';
 
 const About = () => {
     const [intro, stack, closing] = aboutText.split('\n\n');
@@ -30,7 +17,6 @@ const About = () => {
                 <div className="absolute top-1/3 -left-20 w-72 h-72 rounded-full blur-3xl opacity-[0.04] dark:opacity-[0.07] bg-amber-400" />
             </div>
 
-            {/* ── Section heading ────────────────────────────────────────── */}
             <Heading title="About Me" subtitle="Who I Am" />
 
             {/* ── Two-column: text + image ───────────────────────────────── */}
@@ -44,7 +30,6 @@ const About = () => {
                     viewport={{ once: true, amount: 0.2 }}
                     className="flex-1 flex flex-col gap-6"
                 >
-                    {/* Intro paragraph — larger, emphasis */}
                     <motion.p
                         variants={fadeUp}
                         className="text-base leading-relaxed text-zinc-700 dark:text-zinc-300 font-medium"
@@ -52,7 +37,6 @@ const About = () => {
                         {intro}
                     </motion.p>
 
-                    {/* Remaining paragraphs — slightly muted */}
                     <motion.div variants={fadeUp} className="flex flex-col gap-4">
                         {[stack, closing].map((para, i) => (
                             <p key={i} className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
@@ -100,20 +84,14 @@ const About = () => {
                     className="shrink-0 lg:self-center flex items-center justify-center"
                 >
                     <div className="relative">
-                        {/* Decorative gradient frame */}
-                        <div
-                            className="absolute -inset-1 rounded-3xl opacity-30 blur-sm"
-                            style={{ background: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)" }}
-                        />
-                        <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border border-zinc-200/60 dark:border-zinc-700/60 shadow-2xl"
-                            style={{ background: "linear-gradient(145deg, #fef3c7 0%, #fde68a 45%, #fbbf24 100%)" }}>
+                        <PhotoFrame width="w-64 lg:w-80" height="h-64 lg:h-80">
                             <Image
-                                src="/about-me.png"
+                                src="/me/image-2.JPG"
                                 alt="About André Costa"
                                 fill
-                                className="object-contain object-bottom"
+                                className="object-cover object-top"
                             />
-                        </div>
+                        </PhotoFrame>
 
                         {/* Floating location badge */}
                         <motion.div

@@ -2,5 +2,11 @@
 @config "../../tailwind.config.js";
 
 html {
-    scroll-behavior: smooth !important;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+.sections-container > * {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }

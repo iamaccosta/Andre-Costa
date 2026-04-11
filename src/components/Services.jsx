@@ -150,7 +150,7 @@ const Services = () => {
                         <button
                             key={demo.key}
                             onClick={() => setActiveDemo(demo.key)}
-                            className="relative px-4 py-2 text-xs font-semibold rounded-xl transition-colors duration-150"
+                            className="relative px-4 py-2 text-xs font-semibold rounded-xl transition-colors duration-150 cursor-pointer"
                         >
                             {activeDemo === demo.key && (
                                 <motion.div

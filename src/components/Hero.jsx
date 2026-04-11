@@ -1,28 +1,25 @@
 'use client'
 import Image from "next/image";
-import { heroIcons, heroRoles, heroTechBadges, aboutData, downloadIcon } from "@/assets";
+import { heroIcons, heroRoles, heroTechBadges, aboutData, fadeUp, stagger } from "@/assets";
 import { useMotionValue, useTransform, motion, useSpring, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
+import PhotoFrame from "./sub/PhotoFrame";
 
-// ─── Animation variants ───────────────────────────────────────────────────────
-
-const stagger = {
+// Hero-specific entry animation (faster stagger + earlier start than default)
+const heroStagger = {
     hidden:   {},
     visible:  { transition: { staggerChildren: 0.1, delayChildren: 0.3 } },
 };
 
-const fadeUp = {
+const heroFadeUp = {
     hidden:   { opacity: 0, y: 28 },
     visible:  { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
-
-// ─── Component ────────────────────────────────────────────────────────────────
 
 const Hero = () => {
     const [buttonHover, setButtonHover]   = useState(false);
     const [roleIndex,   setRoleIndex]     = useState(0);
 
-    // Cycle through roles
     useEffect(() => {
         const id = setInterval(() => setRoleIndex(i => (i + 1) % heroRoles.length), 2800);
         return () => clearInterval(id);
@@ -51,10 +48,8 @@ const Hero = () => {
         >
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">
-                {/* Ambient blobs */}
                 <div className="absolute -top-20 right-0 w-120 h-120 rounded-full blur-3xl opacity-[0.07] dark:opacity-[0.12] bg-amber-400" />
                 <div className="absolute bottom-0 left-1/3 w-80 h-80 rounded-full blur-3xl opacity-[0.05] dark:opacity-[0.08] bg-red-400" />
-                {/* Subtle dot grid */}
                 <div
                     className="absolute inset-0 opacity-[0.025] dark:opacity-[0.04]"
                     style={{
@@ -69,13 +64,13 @@ const Hero = () => {
 
                 {/* ── LEFT: Text content ──────────────────────────────────── */}
                 <motion.div
-                    variants={stagger}
+                    variants={heroStagger}
                     initial="hidden"
                     animate="visible"
                     className="flex-1 flex flex-col gap-5 text-center lg:text-left"
                 >
                     {/* Available badge */}
-                    <motion.div variants={fadeUp} className="flex justify-center lg:justify-start">
+                    <motion.div variants={heroFadeUp} className="flex justify-center lg:justify-start">
                         <span className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-medium px-3 py-1.5 rounded-full">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                             Available for new projects
@@ -83,7 +78,7 @@ const Hero = () => {
                     </motion.div>
 
                     {/* Animated role */}
-                    <motion.div variants={fadeUp} className="h-5 flex items-center justify-center lg:justify-start overflow-hidden">
+                    <motion.div variants={heroFadeUp} className="h-5 flex items-center justify-center lg:justify-start overflow-hidden">
                         <AnimatePresence mode="wait">
                             <motion.p
                                 key={roleIndex}
@@ -100,7 +95,7 @@ const Hero = () => {
 
                     {/* Name */}
                     <motion.h1
-                        variants={fadeUp}
+                        variants={heroFadeUp}
                         className="font-extrabold tracking-tight leading-[1.08] text-zinc-900 dark:text-white"
                         style={{ fontSize: "clamp(2.2rem, 5vw, 3.75rem)" }}
                     >
@@ -116,14 +111,14 @@ const Hero = () => {
 
                     {/* Quote */}
                     <motion.p
-                        variants={fadeUp}
+                        variants={heroFadeUp}
                         className="text-sm italic leading-relaxed text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto lg:mx-0 border-l-2 border-amber-400/50 pl-3"
                     >
                         One day of doing things is more worth than one month of planning them.
                     </motion.p>
 
                     {/* Stats */}
-                    <motion.div variants={fadeUp} className="flex items-center gap-7 justify-center lg:justify-start">
+                    <motion.div variants={heroFadeUp} className="flex items-center gap-7 justify-center lg:justify-start">
                         {aboutData.slice(0, 3).map((stat) => (
                             <div key={stat.title} className="flex flex-col items-center lg:items-start">
                                 <span className="text-2xl font-bold text-zinc-900 dark:text-white leading-none">
@@ -138,7 +133,7 @@ const Hero = () => {
                     </motion.div>
 
                     {/* CTAs */}
-                    <motion.div variants={fadeUp} className="flex items-center gap-3 flex-wrap justify-center lg:justify-start">
+                    <motion.div variants={heroFadeUp} className="flex items-center gap-3 flex-wrap justify-center lg:justify-start">
                         <motion.a
                             href="#contact"
                             whileTap={{ scale: 0.97 }}
@@ -158,19 +153,10 @@ const Hero = () => {
                                 →
                             </motion.span>
                         </motion.a>
-
-                        <a
-                            href="/nick-cv.pdf"
-                            download
-                            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:border-amber-400/60 dark:hover:border-amber-500/50 transition-colors duration-200"
-                        >
-                            Download CV
-                            <span className="text-base">{downloadIcon}</span>
-                        </a>
                     </motion.div>
 
                     {/* Social icons */}
-                    <motion.div variants={fadeUp} className="flex items-center gap-2.5 justify-center lg:justify-start">
+                    <motion.div variants={heroFadeUp} className="flex items-center gap-2.5 justify-center lg:justify-start">
                         {heroIcons.map((item, i) => (
                             <a
                                 key={i}
@@ -200,27 +186,15 @@ const Hero = () => {
                         style={{ rotateX, rotateY }}
                         className="relative flex items-center justify-center"
                     >
-                        {/* Ambient glow */}
-                        <div
-                            className="absolute inset-0 blur-3xl opacity-20 dark:opacity-30 scale-90 rounded-full pointer-events-none"
-                            style={{ background: "radial-gradient(circle, #f59e0b 0%, #ef4444 55%, transparent 80%)" }}
-                        />
-
-                        {/* Decorative rings */}
-                        <div className="absolute -inset-5 rounded-full border border-amber-400/12 pointer-events-none" />
-                        <div className="absolute -inset-10 rounded-full border border-amber-400/7 pointer-events-none" />
-
-                        {/* Image on gradient slab */}
-                        <div className="relative w-56 h-56 lg:w-72 lg:h-72 rounded-3xl overflow-hidden shadow-2xl"
-                            style={{ background: "linear-gradient(145deg, #fef3c7 0%, #fde68a 45%, #fbbf24 100%)" }}>
+                        <PhotoFrame width="w-56 lg:w-72" height="h-56 lg:h-72">
                             <Image
-                                src="/person.png"
+                                src="/me/image-4.JPG"
                                 alt="André C. Costa"
                                 fill
                                 priority
-                                className="object-contain object-bottom drop-shadow-xl"
+                                className="object-cover object-top"
                             />
-                        </div>
+                        </PhotoFrame>
 
                         {/* Floating tech badges */}
                         {heroTechBadges.map((badge) => (
@@ -259,11 +233,11 @@ const Hero = () => {
                 transition={{ delay: 1.6, duration: 0.6 }}
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
             >
-                <span className="text-[9px] tracking-widest uppercase text-zinc-400 dark:text-zinc-600 font-medium">Scroll</span>
+                <span className="text-[11px] tracking-widest uppercase text-zinc-500 dark:text-zinc-200 font-medium">Scroll</span>
                 <motion.div
                     animate={{ y: [0, 6, 0] }}
                     transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                    className="w-px h-7 rounded-full"
+                    className="w-0.5 h-7 rounded-full"
                     style={{ background: "linear-gradient(to bottom, #f59e0b80, transparent)" }}
                 />
             </motion.div>

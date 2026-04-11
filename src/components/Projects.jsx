@@ -33,7 +33,7 @@ const Projects = () => {
                     <button
                         key={text}
                         onClick={() => setDomain(text)}
-                        className="relative px-4 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200"
+                        className="relative px-4 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 cursor-pointer"
                         style={{
                             color: domain === text ? "#fff" : undefined,
                         }}
