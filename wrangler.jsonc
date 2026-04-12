@@ -6,8 +6,8 @@
   "observability": {
     "enabled": true
   },
-  "main": ".open-next/worker.js",
+  "main": "./app/page.js",
   "assets": {
-    "directory": "./dist"
+    "directory": "./assets"
   }
 }
