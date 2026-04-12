@@ -6,8 +6,8 @@
   "observability": {
     "enabled": true
   },
-  "main": "./app/page.js",
+  "main": "src/app/page.js",
   "assets": {
-    "directory": "./assets"
+    "directory": "src/assets"
   }
 }
