@@ -64,7 +64,7 @@ const About = () => {
                     {/* Download CV */}
                     <motion.div variants={fadeUp}>
                         <a
-                            href="/nick-cv.pdf"
+                            href="/cv.pdf"
                             download
                             className="inline-flex items-center gap-2.5 px-6 py-3 text-sm font-semibold text-white rounded-xl shadow-md transition-all duration-200 hover:shadow-amber-500/20 hover:-translate-y-0.5 active:scale-97"
                             style={{ background: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)" }}
