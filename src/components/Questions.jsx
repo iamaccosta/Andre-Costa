@@ -10,7 +10,7 @@ import { questions } from '@/assets'
 const Questions = () => (
     <div
         id="questions"
-        className="relative min-h-screen flex flex-col justify-center py-24 overflow-hidden"
+        className="relative min-h-screen flex flex-col justify-center py-10 overflow-hidden"
     >
         {/* ── Decorative background ──────────────────────────────────── */}
         <div className="pointer-events-none absolute inset-0">

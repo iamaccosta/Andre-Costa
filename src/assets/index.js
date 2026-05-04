@@ -105,7 +105,7 @@ export const aboutHighlights = [
 ]
 
 // About Me
-export const aboutText = "I'm André Costa, an Informatics and Computing Engineer with a strong focus on building production-grade software and scalable systems. Currently working as a Junior Researcher at INESC TEC, I develop Digital Twin solutions using Asset Administration Shell (AAS) and IIoT architectures, bridging research with real industrial applications.\n\nI have a solid background in full-stack development and software architecture, with hands-on experience across modern technologies including React, Node.js, Docker, and data-driven systems. I approach engineering with precision and ownership, aiming not just to write code, but to design reliable, maintainable solutions that deliver real impact.\n\nDriven by continuous improvement, I invest heavily in learning, personal projects, and refining both technical and problem-solving skills—always pushing to operate at a higher level each iteration."
+export const aboutText = "I'm André Costa, an Informatics and Computing Engineer with a strong focus on building production-grade software and scalable systems. Currently working as a Junior Researcher at INESC TEC, where I develop Digital Twin solutions using Asset Administration Shell (AAS) and IIoT architectures, bridging research with real industrial applications.\n\nI have a solid background in full-stack development and software architecture, with hands-on experience across modern technologies including React, Node.js, Docker, and data-driven systems. I approach engineering with precision and ownership, aiming not just to write code, but to design reliable, maintainable solutions that deliver real impact.\n\nDriven by continuous improvement, I invest heavily in learning, personal projects, and refining both technical and problem-solving skills, always pushing to operate at a higher level each iteration."
 
 // Experience
 export const experienceData = [
@@ -115,8 +115,8 @@ export const experienceData = [
     education:
       'Completed secondary education in Science and Technology at António Sérgio Secondary School, Vila Nova de Gaia, Porto, Portugal.',
     experience: [
-      'Built a strong foundation in mathematics, physics, and analytical problem-solving.',
-      'Had early exposure to programming concepts, including Visual Basic.',
+      'Built a strong foundation in mathematics and physics.',
+      'Had early exposure to programming concepts.',
     ],
     work: false,
   },
@@ -127,7 +127,7 @@ export const experienceData = [
       'Completed the 1st year of the Integrated Master\'s in Electrical and Computer Engineering at FEUP, Porto, Portugal.',
     experience: [
       'Developed core engineering fundamentals in mathematics, physics, and computational thinking.',
-      'Strengthened programming foundations through work in Assembly and C.',
+      'Learned programming foundations through work in Assembly and C.',
     ],
     work: false,
   },
@@ -137,7 +137,7 @@ export const experienceData = [
     education:
       "Completed a Bachelor's degree in Informatics and Computing Engineering at FEUP, Porto, Portugal.",
     experience: [
-      'Built a solid foundation in computer science, software development, and software testing.',
+      'Built a solid foundation in computer science and software development and testing.',
       'Strengthened problem-solving, collaboration, and engineering discipline through academic projects.',
     ],
     work: false,
@@ -172,6 +172,7 @@ export const experienceData = [
     education:
       'Currently working as a Junior Researcher at INESC TEC, Porto, Portugal.',
     experience: [
+      'Continue previous developments and integrations in the field of Digital Twins and IIoT.',
       'Contribute to the preparation of European research and innovation project proposals.',
       'Provide technological consulting to industrial partners.',
     ],
@@ -179,81 +180,61 @@ export const experienceData = [
   },
 ]
 
-// Skills
-export const skillsData = [
+// Skills — grouped by category
+export const skillsCategories = [
   {
-    name: 'Figma',
-    icon: '/skills/figma.png',
+    label: 'Frontend',
+    color: '#3b82f6',
+    skills: [
+      { name: 'React',          icon: '/skills/react.png'    },
+      { name: 'Next.js',        icon: '/skills/nextjs.png'   },
+      { name: 'TypeScript',     icon: '/skills/ts.png'       },
+      { name: 'JavaScript',     icon: '/skills/js.png'       },
+      { name: 'HTML',           icon: '/skills/html.png'     },
+      { name: 'CSS',            icon: '/skills/css.png'      },
+      { name: 'Tailwind CSS',   icon: '/skills/tailwind.png' },
+      { name: 'Framer Motion',  icon: '/skills/framer.png'   },
+    ],
   },
   {
-    name: 'Photoshop',
-    icon: '/skills/photoshop.png',
+    label: 'Backend',
+    color: '#10b981',
+    skills: [
+      { name: 'Node.js',     icon: '/skills/nodejs.png'  },
+      { name: 'MongoDB',     icon: '/skills/mongodb.png' },
+      { name: 'Spring Boot', emoji: '🍃'                 },
+      { name: 'PostgreSQL',  emoji: '🐘'                 },
+      { name: 'REST APIs',   emoji: '🔌'                 },
+      { name: 'SQL',         emoji: '🗄️'                 },
+    ],
   },
   {
-    name: 'Blender',
-    icon: '/skills/blender.png',
+    label: 'Tools & DevOps',
+    color: '#f59e0b',
+    skills: [
+      { name: 'VS Code', icon: '/skills/vscode.png' },
+      { name: 'GitHub',  icon: '/skills/github.png' },
+      { name: 'Figma',   icon: '/skills/figma.png'  },
+      { name: 'Vite',    icon: '/skills/vite.png'   },
+      { name: 'Docker',  emoji: '🐳'                },
+      { name: 'Grafana', emoji: '📊'                },
+    ],
   },
   {
-    name: 'VS Code',
-    icon: '/skills/vscode.png',
-  },
-  {
-    name: 'HTML',
-    icon: '/skills/html.png',
-  },
-  {
-    name: 'CSS',
-    icon: '/skills/css.png',
-  },
-  {
-    name: 'JavaScript',
-    icon: '/skills/js.png',
-  },
-  {
-    name: 'TailwindCSS',
-    icon: '/skills/tailwind.png',
-  },
-  {
-    name: 'Vite',
-    icon: '/skills/vite.png',
-  },
-  {
-    name: 'ReactJS',
-    icon: '/skills/react.png',
-  },
-  {
-    name: 'TypeScript',
-    icon: '/skills/ts.png',
-  },
-  {
-    name: 'AI',
-    icon: '/skills/ai.png',
-  },
-  {
-    name: 'Framer Motion',
-    icon: '/skills/framer.png',
-  },
-  {
-    name: 'ThreeJS',
-    icon: '/skills/threejs.png',
-  },
-  {
-    name: 'NextJS',
-    icon: '/skills/nextjs.png',
-  },
-  {
-    name: 'NodeJS',
-    icon: '/skills/nodejs.png',
-  },
-  {
-    name: 'MongoDB',
-    icon: '/skills/mongodb.png',
-  },
-  {
-    name: 'Github',
-    icon: '/skills/github.png',
+    label: 'Research',
+    color: '#6366f1',
+    skills: [
+      { name: 'Digital Twins', emoji: '🔬' },
+      { name: 'AAS / I4.0',   emoji: '🏭' },
+      { name: 'IIoT',         emoji: '📡' },
+      { name: 'MQTT / Kafka', emoji: '⚡' },
+      { name: 'Data Pipelines', emoji: '🔄' },
+    ],
   },
 ]
+
+// Legacy flat list (kept for backwards compat with any existing references)
+export const skillsData = skillsCategories.flatMap(c => c.skills)
 
 import StoreIcon from 'remixicon-react/StoreLineIcon'
 export const storeIcon = <StoreIcon />
@@ -274,7 +255,7 @@ export const servicesData = [
     accent: '#f59e0b',
     description:
       'Design and develop responsive web applications with clean architecture and performance in mind. Focused on usability, maintainability, and scalable frontend structures.',
-    tech: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+    tech: ['React', 'Next.js', 'TypeScript', 'CSS'],
   },
   {
     title: 'Backend & APIs',
@@ -283,7 +264,7 @@ export const servicesData = [
     accent: '#10b981',
     description:
       'Design and implement backend systems and RESTful APIs to support web and mobile applications. Emphasis on data integrity, performance, and clear service architecture.',
-    tech: ['Node.js', 'Spring Boot', 'REST APIs', 'SQL'],
+    tech: ['Node.js', 'Spring Boot', 'REST APIs',],
   },
   {
     title: 'Full-Stack Development',
@@ -292,25 +273,7 @@ export const servicesData = [
     accent: '#818cf8',
     description:
       'Build complete applications from frontend to backend, ensuring seamless integration between components and consistent data flow across the system.',
-    tech: ['React', 'Node.js', 'Next.js', 'SQL'],
-  },
-  {
-    title: 'Database Design',
-    subtitle: 'Structured and efficient data systems',
-    icon: <DatabaseLineIcon />,
-    accent: '#60a5fa',
-    description:
-      'Design relational database schemas and optimize data storage solutions to ensure consistency, scalability, and efficient querying.',
-    tech: ['PostgreSQL', 'MySQL', 'SQL'],
-  },
-  {
-    title: 'Bug Fixing & Optimization',
-    subtitle: 'Debugging, refactoring, and performance improvements',
-    icon: <BugLineIcon />,
-    accent: '#f87171',
-    description:
-      'Identify, debug, and resolve issues in existing applications. Improve code quality, fix performance bottlenecks, and ensure system stability.',
-    tech: ['Debugging', 'Code Review', 'Performance Optimization'],
+    tech: ['React', 'Node.js', 'SQL', 'MongoDB', ],
   },
   {
     title: 'UI Implementation',
@@ -319,7 +282,7 @@ export const servicesData = [
     accent: '#c084fc',
     description:
       'Translate designs into responsive and consistent user interfaces, focusing on layout precision, responsiveness, and user experience.',
-    tech: ['HTML', 'CSS', 'Tailwind CSS', 'React'],
+    tech: ['React', 'Tailwind CSS', 'Framer Motion'],
   },
 ]
 
@@ -395,6 +358,7 @@ export const projectsData = [
     tech: ['Java', 'Spring Boot', 'AAS', 'PLC Drivers', 'REST'],
     status: 'prototype',
   },
+
   {
     name: 'AAS for Bio-Products in Aquaculture',
     summary:
@@ -436,7 +400,7 @@ export const projectsData = [
     source: 'course',
     tech: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
     repoUrl:
-      'https://www.udemy.com/course/build-portfolio-with-nextjs-framer-motion-tailwind-css/',
+      'https://iamaccosta.dev',
     status: 'completed',
   },
 ]
@@ -491,7 +455,7 @@ export const checkIcon = <CheckLineIcon />
 export const pricingPlans = [
   {
     tier: 'Basic',
-    title: 'Website Dev. — Basic',
+    title: 'Website Dev. - Basic',
     pricing: '$400 - $800',
     icon: <RocketLineIcon />,
     accent: '#f59e0b',
@@ -508,7 +472,7 @@ export const pricingPlans = [
   },
   {
     tier: 'Standard',
-    title: 'Website Dev. — Standard',
+    title: 'Website Dev. - Standard',
     pricing: '$1,200 - $2,200',
     icon: <AwardLineIcon />,
     accent: '#ef4444',
@@ -528,7 +492,7 @@ export const pricingPlans = [
   },
   {
     tier: 'Premium',
-    title: 'Website Dev. — Premium',
+    title: 'Website Dev. - Premium',
     pricing: '$3,500 - $7,000',
     icon: <VipCrownLineIcon />,
     accent: '#818cf8',
@@ -553,27 +517,27 @@ export const pricingPlans = [
 export const questions = [
   {
     question: "How do we communicate throughout the project?",
-    answer: "Before we start, we have a discovery call to align on scope and expectations. During the build, communication takes place primarily over email or messaging, keeping everything written and trackable. I provide regular progress updates and welcome feedback at each milestone.",
+    answer: "Before we start, we have a discovery call to align on scope and expectations. During the build, communication takes place primarily over email or messaging on the platform, keeping everything written and trackable. I provide regular progress updates and welcome feedback at each milestone.",
   },
   {
     question: "How long does it take to build a website?",
-    answer: "It typically takes 4 to 8 weeks from kickoff to delivery, depending on the complexity and scope. The timeline is heavily influenced by how quickly content, assets, and feedback are provided on your side. I will always give you a clear estimate before we begin.",
+    answer: "Well, it depends on the complexity, scope, urgency, and your availability. The timeline is heavily influenced by how quickly content, assets, and feedback are provided on your side. It may take 4 to 8 weeks from kickoff to delivery, as well as 3 to 6 months if it is a complex project. I will always give you a clear estimate before we begin.",
   },
   {
     question: "What do you need from me to get started?",
-    answer: "To kick off the project I need a clear brief covering your goals, target audience, and any design references you like. Depending on the scope, I may also need copy (text), images or brand assets, and access to any existing tools or platforms you use.",
+    answer: "To kick off the project I need a clear brief covering your goals, target audience, and any design references you like (similar websites/images of reference). Depending on the scope, I may also need copy (text), images or brand assets, and access to any existing tools or platforms you use.",
   },
   {
     question: "Who hosts the website and handles deployment?",
-    answer: "I handle the full deployment process. For most projects I recommend Vercel or Netlify, both are fast, reliable, and have generous free tiers. If you already have a preferred hosting provider, I can work with that too. You will always have full ownership and access to your infrastructure.",
+    answer: "I handle the full deployment process. I may recommend a few options with free tiers. If you already have a preferred hosting provider, I can work with that too. You will always have full ownership and access to your infrastructure.",
   },
   {
     question: "Can I update the website myself after it is delivered?",
-    answer: "Yes. I build with maintainability in mind and can integrate a CMS (like Sanity or Contentful) so you can manage content without touching code. I also provide a handover walkthrough so you feel confident making day-to-day edits on your own.",
+    answer: "Yes. I build with maintainability in mind. I document the process andalso provide a handover walkthrough so you feel confident making day-to-day edits on your own. We can maintain an open line of communication for any questions that come up after delivery, and I also offer ongoing maintenance packages if you prefer to have me handle updates and support.",
   },
   {
     question: "What happens if I am not happy with the result?",
-    answer: "Satisfaction is a priority. I share design mockups and work-in-progress previews before full implementation, so you can give feedback early. If something does not meet expectations after delivery, I offer a revision round to address it. The goal is always a result you are proud of.",
+    answer: "Satisfaction is a priority. I work with agile methodology, meaning that I will be sharing images and details of the work-in-progress before full implementation, so you can give feedback early. If something does not meet expectations after delivery, we can align with your expectations and needs. The goal is always a result you are proud of.",
   },
 ]
 
@@ -590,11 +554,8 @@ import UserLineIcon         from 'remixicon-react/UserLineIcon'
 import RoadMapLineIcon      from 'remixicon-react/RoadMapLineIcon'
 import Folder3LineIcon      from 'remixicon-react/Folder3LineIcon'
 import BriefcaseLineIcon    from 'remixicon-react/BriefcaseLineIcon'
-import PriceTag3LineIcon    from 'remixicon-react/PriceTag3LineIcon'
 import MailLineIcon         from 'remixicon-react/MailLineIcon'
 import QuestionLineIcon     from 'remixicon-react/QuestionLineIcon'
-// Reserved for future sections (Skills, Reviews)
-export { default as CpuLineIcon }       from 'remixicon-react/CpuLineIcon'
 export { default as ChatQuoteLineIcon } from 'remixicon-react/ChatQuoteLineIcon'
 
 export const navbarData = [

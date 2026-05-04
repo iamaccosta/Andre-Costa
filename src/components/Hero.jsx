@@ -44,10 +44,10 @@ const Hero = () => {
     return (
         <div
             id="home"
-            className="relative h-screen flex items-center px-5 sm:p-0 overflow-hidden"
+            className="relative h-screen flex items-center px-5 sm:p-0"
         >
             {/* ── Decorative background ──────────────────────────────────── */}
-            <div className="pointer-events-none absolute inset-0">
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 <div className="absolute -top-20 right-0 w-120 h-120 rounded-full blur-3xl opacity-[0.07] dark:opacity-[0.12] bg-amber-400" />
                 <div className="absolute bottom-0 left-1/3 w-80 h-80 rounded-full blur-3xl opacity-[0.05] dark:opacity-[0.08] bg-red-400" />
                 <div
@@ -186,7 +186,7 @@ const Hero = () => {
                         style={{ rotateX, rotateY }}
                         className="relative flex items-center justify-center"
                     >
-                        <PhotoFrame width="w-56 lg:w-72" height="h-56 lg:h-72">
+                        <PhotoFrame width="w-56 lg:w-96" height="h-56 lg:h-96">
                             <Image
                                 src="/me/image-4.JPG"
                                 alt="André C. Costa"

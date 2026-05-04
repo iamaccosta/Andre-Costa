@@ -11,10 +11,11 @@ const Achievements = ({ title, amount, icon }) => {
 
     return (
         <motion.div
-            whileInView={startCount}
+            onViewportEnter={startCount}
             viewport={{ once: true }}
             initial={{ opacity: 0, y: 20 }}
-            whileInViewAnimation={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="group relative flex-1 min-w-36 flex flex-col gap-3 rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800/60 p-5 overflow-hidden transition-all duration-300 hover:border-amber-400/50 dark:hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5"
         >
             {/* Gradient top-edge accent */}

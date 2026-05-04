@@ -13,12 +13,26 @@ const Question = ({ question_data, index }) => {
             viewport={{ once: true, margin: '40px' }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: index * 0.04 }}
             className={[
-                "rounded-xl border transition-colors duration-200 overflow-hidden",
+                "relative rounded-xl border transition-colors duration-200 overflow-hidden",
                 open
-                    ? "border-amber-400/60 dark:border-amber-500/50 bg-zinc-50 dark:bg-zinc-800/60"
+                    ? "border-zinc-200 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/60"
                     : "border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-600",
             ].join(' ')}
         >
+            {/* Orange left accent bar (shown when expanded) */}
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: 1 }}
+                        exit={{ scaleY: 0 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute left-0 inset-y-0 w-[3px] origin-top pointer-events-none"
+                        style={{ background: "linear-gradient(to bottom, #f59e0b, #ef4444)" }}
+                    />
+                )}
+            </AnimatePresence>
+
             {/* Header row */}
             <button
                 onClick={() => setOpen(!open)}

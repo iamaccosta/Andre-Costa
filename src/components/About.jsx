@@ -10,7 +10,7 @@ const About = () => {
     const [intro, stack, closing] = aboutText.split('\n\n');
 
     return (
-        <div id="about" className="relative min-h-screen flex flex-col justify-center py-24 overflow-hidden">
+        <div id="about" className="relative min-h-screen flex flex-col justify-center gap-y-10 overflow-hidden">
 
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">
@@ -32,7 +32,7 @@ const About = () => {
                 >
                     <motion.p
                         variants={fadeUp}
-                        className="text-base leading-relaxed text-zinc-700 dark:text-zinc-300 font-medium"
+                        className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 font-medium"
                     >
                         {intro}
                     </motion.p>

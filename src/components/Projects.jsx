@@ -11,7 +11,7 @@ const Projects = () => {
     const filtered = projectsData.filter((p) => domain === "All" || p.domain === domain)
 
     return (
-        <div id="projects" className="relative min-h-screen py-24 overflow-hidden">
+        <div id="projects" className="relative min-h-screen xs:py-20 md:py-10 overflow-hidden">
 
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">

@@ -52,7 +52,7 @@ const DomainBanner = ({ domain, tech, highlights, hovered }) => {
                         className="relative flex flex-col items-center gap-3 px-4"
                     >
                         <span className="text-4xl">{cfg.icon}</span>
-                        <div className="flex flex-wrap justify-center gap-1.5">
+                        <div className="flex flex-wrap justify-center gap-1.5 min-h-[3.25rem] content-center">
                             {tech.slice(0, 5).map((t) => (
                                 <span
                                     key={t}
@@ -139,8 +139,9 @@ const ImageBanner = ({ image, name, highlights, hovered }) => (
 const Project = ({ index, name, summary, highlights, image, domain, source, tech, repoUrl, status }) => {
     const [hovered, setHovered] = useState(false)
 
-    const statusCfg = projectStatusConfig[status]  ?? projectStatusConfig.completed
-    const sourceCfg = projectSourceConfig[source]  ?? projectSourceConfig.academic
+    const statusCfg  = projectStatusConfig[status]  ?? projectStatusConfig.completed
+    const sourceCfg  = projectSourceConfig[source]  ?? projectSourceConfig.academic
+    const domainCfg  = projectDomainConfig[domain]  ?? { color: '#f59e0b', icon: '📁' }
 
     return (
         <motion.div
@@ -152,6 +153,7 @@ const Project = ({ index, name, summary, highlights, image, domain, source, tech
             onHoverStart={() => setHovered(true)}
             onHoverEnd={() => setHovered(false)}
             className="group relative w-full sm:w-80 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700/60 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-xl hover:shadow-zinc-900/10 dark:hover:shadow-black/30 transition-shadow duration-300 cursor-pointer"
+            style={{ borderLeftColor: domainCfg.color, borderLeftWidth: '3px' }}
         >
             {/* ── Visual banner: image or domain panel ───────────────────── */}
             {image ? (
@@ -181,7 +183,7 @@ const Project = ({ index, name, summary, highlights, image, domain, source, tech
 
                 {/* Title + domain tag */}
                 <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white leading-snug line-clamp-2">
+                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white leading-snug line-clamp-2 min-h-10">
                         {name}
                     </h3>
                     <span className="shrink-0 text-[10px] font-semibold text-amber-600 dark:text-amber-500 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-full px-2 py-0.5">
@@ -196,7 +198,7 @@ const Project = ({ index, name, summary, highlights, image, domain, source, tech
 
                 {/* Tech tags — only shown when there's no image (banner already shows them) */}
                 {image && (
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1.5 min-h-[3.25rem] content-start">
                         {tech.slice(0, 4).map((t) => (
                             <span
                                 key={t}

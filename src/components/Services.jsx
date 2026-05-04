@@ -83,7 +83,7 @@ const Services = () => {
     const currentDemo = serviceDemos.find(d => d.key === activeDemo);
 
     return (
-        <div id="services" className="relative py-24 overflow-hidden">
+        <div id="services" className="relative xs:py-20 md:py-10 overflow-hidden">
 
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">

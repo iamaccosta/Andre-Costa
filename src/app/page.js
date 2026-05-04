@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react';
 import Toggle from '@/components/sub/Toggle';
 import Load from '@/components/sub/Load';
 import Services from '@/components/Services';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const [id, setId ] = useState(0);
@@ -34,7 +35,7 @@ export default function Home() {
   return (
     <>
       <Load />
-      <Toggle>  
+      <Toggle>
         <NavBar id={id} />
         <div className="w-full sections-container" ref={compsRef}>
           <Hero />
@@ -44,6 +45,7 @@ export default function Home() {
           <Services />
           <Contact />
           <Questions />
+          <Footer />
         </div>
       </Toggle>
     </>

@@ -42,9 +42,9 @@ const Toggle = ({ children }) => {
     }
 
     return (
-        <main ref={mainRef}>
-            <div className="bg-zinc-50 dark:bg-zinc-900 transition-colors duration-300">
-                <div className="xl:max-w-300 w-full mx-auto flex justify-center sm:px-30 pl-20 pr-5 overflow-hidden">
+        <main ref={mainRef} className="bg-zinc-50 dark:bg-zinc-900 transition-colors duration-300">
+            <div className="bg-zinc-50 dark:bg-zinc-900">
+                <div className="xl:max-w-3/4 w-full mx-auto flex justify-center sm:px-30 pl-20 pr-5 overflow-hidden">
 
                     {/* ── Dark mode toggle ───────────────────────────────── */}
                     <motion.button

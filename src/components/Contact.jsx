@@ -113,7 +113,7 @@ const Contact = () => {
     return (
         <div
             id="contact"
-            className="relative min-h-screen flex flex-col justify-center py-24 overflow-hidden"
+            className="relative min-h-screen flex flex-col justify-center xs:py-20 md:py-10 overflow-hidden"
         >
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">
