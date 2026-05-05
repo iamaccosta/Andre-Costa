@@ -1,137 +1,112 @@
-# Graph View — Phase 1 Plan
+# Vortex Transition — Implementation Tasks
 
-## Context
-
-The portfolio currently has a single scroll-snap view with 8 sections navigated via a left sidebar. This plan adds a second "Graph View" — a dark, cinematic, no-scroll canvas where website sections become interconnected blob nodes linked by animated lightning edges. Phase 1 ships only the Hero node (fully populated) plus 5 ghost placeholder nodes (About, Experience, Projects, Services, Contact) connected by live lightning edges. A view toggle button at the top of the Hero section switches between views with a Flash-style spark explosion transition.
-
----
-
-## Architecture
-
-### State
-
-Add `viewMode: 'scroll' | 'graph'` state to `src/app/page.js`.  
-- In `scroll` mode: render existing sections container + NavBar (unchanged).  
-- In `graph` mode: render `<GraphView>` full-screen; hide NavBar and sections container; force `dark` class on root regardless of theme toggle.
-
-### New files
-
-| File | Purpose |
-|------|---------|
-| `src/components/GraphView.jsx` | Full-screen graph canvas — positions all nodes, renders edges, owns graph-level dark styles |
-| `src/components/graph/HeroNode.jsx` | Large central blob node containing condensed hero content (name, role, photo, CTA) |
-| `src/components/graph/GhostNode.jsx` | Dimmed outline blob for placeholder sections (About, Experience, etc.) |
-| `src/components/graph/LightningEdge.jsx` | SVG animated lightning bolt path connecting two nodes |
-| `src/components/graph/FlashTransition.jsx` | Full-screen spark/lightning explosion overlay that plays on view switch |
-| `src/components/graph/ViewSwitcher.jsx` | Pill toggle button ("Scroll ↔ Graph") rendered at top of Hero section |
-
-### Modified files
-
-| File | Change |
-|------|--------|
-| `src/app/page.js` | Add `viewMode` state; pass `viewMode + setViewMode` to `<Hero>`; conditionally render `<GraphView>` vs sections container; suppress NavBar in graph mode |
-| `src/components/Hero.jsx` | Accept `viewMode` + `setViewMode` props; render `<ViewSwitcher>` as an absolutely positioned element at the top of the hero div |
+> **Context:** Single-page portfolio site. Stack: React, Next.js, Tailwind CSS, Framer Motion.
+> Existing Framer Motion transitions live directly on elements inside each section component.
+> Lightning edges already run on a Canvas 2D layer inside `GraphView.jsx`.
+> Color palette: orange `rgba(255, 150, 30, α)` / gold `rgba(255, 210, 80, α)` on black.
 
 ---
 
-## Component Details
+## Task 1 — Create `VortexTransition.jsx`
 
-### `ViewSwitcher.jsx`
-- Pill with two segments: `⚡ Graph` | `≡ Scroll`
-- Amber/gold accent color (matches site palette)
-- `position: absolute; top: 1.25rem; left: 50%; transform: translateX(-50%)` inside Hero's `relative` container
-- On click: calls `setViewMode` and mounts `<FlashTransition>`
+**File:** `src/components/VortexTransition.jsx`
 
-### `FlashTransition.jsx`
-- Fixed full-screen overlay (`z-index: 9999`)
-- Sequence (total ~600ms):
-  1. **Frame 0–80ms**: White/amber flash (`opacity: 0 → 0.85 → 0`) via Framer Motion keyframes
-  2. **Frame 0–500ms**: 8–12 SVG lightning bolt paths radiate outward from center in all directions, each animated with `pathLength: [0, 1]` + `opacity: [1, 0]`, staggered by 20ms
-  3. **Frame 0–300ms**: Whole page scale pulse `scale: [1, 1.04, 1]` applied to body wrapper via Framer Motion
-- Unmounts automatically via `onAnimationComplete` callback
-- No interaction blocking after 300ms (pointer-events: none)
+Create a new component that receives two props: `active` (bool) and `onComplete` (callback function).
 
-### `LightningEdge.jsx`
-Props: `x1, y1, x2, y2` (absolute pixel coords relative to graph canvas)
+- When `active` becomes `true`, mount a `<canvas>` with `position: fixed`, `inset: 0`, `z-index: 9999`, covering the full viewport
+- Use `useRef` for the canvas element and `useEffect` to start/stop the animation loop
+- Clean up with `cancelAnimationFrame` on unmount or when `active` becomes `false`
 
-- SVG `<path>` with jagged/zigzag `d` attribute generated deterministically from props (seeded offsets based on node index — stable across renders, no Math.random)
-- 3 overlapping paths: outer glow (thick, low opacity), mid glow (medium), core (thin, bright white/amber)
-- `strokeDasharray + strokeDashoffset` animation loops for the "electricity flowing" effect (repeat Infinity, duration ~1.2s)
-- SVG `filter`: `feGaussianBlur` + `feComposite` for bloom glow
-- Ghost node edges: 30% opacity vs 80% for future active edges
+**Animation — entry phase (0s → 1.4s):**
 
-### `HeroNode.jsx`
-- Large blob shape via CSS `border-radius` with 8 values, morphing animation cycling every 8s:
-  ```
-  0%:   60% 40% 30% 70% / 60% 30% 70% 40%
-  25%:  30% 60% 70% 40% / 50% 60% 30% 60%
-  50%:  50% 60% 30% 70% / 40% 30% 60% 70%
-  75%:  30% 40% 60% 50% / 60% 70% 30% 40%
-  ```
-- Border: 2px amber gradient wrapper div (`padding: 2px`, inner `background: #050508`)
-- Size: ~420×420px desktop, ~300px mobile
-- Content: name, animated role, small circular photo, "View full section →" CTA
-- Framer Motion entrance: `scale: 0.6 → 1`, `opacity: 0 → 1`, spring physics, after FlashTransition
-- Hover: scale 1.02 + border brightens
+- Draw 14 concentric ellipses centered on the canvas midpoint
+- Ring spacing is exponential (not linear) so inner rings are tighter — simulates depth acceleration
+- Each frame, shift ring radii inward toward the vanishing point (center), wrapping the outermost ring back to the edge when it reaches zero — this creates the forward-tunnel illusion
+- Rotate the entire drawing context slightly each frame: `ctx.rotate(0.004 * frameCount)`
+- Ring stroke color: `rgba(255, 150, 30, alpha)` where alpha is lower for outer rings and stronger for inner rings
 
-### `GhostNode.jsx`
-Props: `label`, `size` (sm/md), `style` (position offsets)
+**Animation — exit phase (1.4s → 2.8s):**
 
-- Smaller blob (~160px), same morphing animation with a different phase offset per node
-- Border: 1px `rgba(245, 158, 11, 0.25)` (faint amber)
-- Interior: `background: rgba(5, 5, 8, 0.6)`, section label centered in muted text
-- No click behavior — `cursor: default`, `pointer-events: none`
-- Framer Motion: `opacity: 0 → 0.45`, delayed after HeroNode entrance
+- Reverse: rings expand outward from center as if the tunnel is opening up
+- Rings accelerate outward, expanding past the viewport edge
+- Overall canvas `globalAlpha` fades from 1 → 0 during the last 0.4s
 
-### `GraphView.jsx`
-- `position: fixed; inset: 0; overflow: hidden; background: #050508; z-index: 50`
-- Forces dark mode: adds `dark` class to `<html>` on mount, restores previous state on unmount
-- Single `<svg>` overlay for all edges + positioned `<div>` nodes on top
-- Node layout (viewport-relative):
-  - Hero: center
-  - About: top-left (~35%, 25%)
-  - Experience: top-right (~65%, 25%)
-  - Projects: right (~80%, 55%)
-  - Services: bottom-right (~65%, 78%)
-  - Contact: bottom-left (~35%, 78%)
-- `ViewSwitcher` pinned top-center to return to scroll view
-- No scroll events; `touch-action: none`
+**Completion:**
+
+- At exactly 2.8s, call `onComplete()`
+- After calling `onComplete`, set a local state flag to unmount the canvas
 
 ---
 
-## Node layout
+## Task 2 — Add light-streak radial lines
 
-```
-        [About]              [Experience]
-            \                   /
-             ⚡               ⚡
-                    [HERO]
-             ⚡               ⚡
-            /                   \
-       [Projects]           [Services]
-                  [Contact]
+**File:** `src/components/VortexTransition.jsx` (same animation loop as Task 1)
+
+After drawing the rings each frame, draw 10 radial lines from the canvas center outward:
+
+- Distribute them evenly at 36° intervals around 360°
+- Line length: scales with the current speed phase — short at the start (20px), peak at mid-transition (150px), short again at exit (20px)
+- Alternate stroke colors: odd lines use `rgba(255, 80, 10, 0.6)` (orange), even lines use `rgba(255, 210, 80, 0.4)` (gold)
+- Line width: `1px`
+- Fade in using `globalAlpha` during the first 0.5s, fade out during the last 0.5s
+- Lines should also rotate with the canvas context (they inherit the same `ctx.rotate` from Task 1)
+
+---
+
+## Task 3 — Create `useVortexNavigation` hook
+
+**File:** `src/components/graph/useVortexNavigation.js`
+
+Create a custom hook that exposes:
+
+```js
+const { triggerVortex, isVortexActive, targetSectionId, handleComplete } = useVortexNavigation()
 ```
 
-Each ghost node connects to Hero with one `LightningEdge`. No ghost-to-ghost edges in phase 1.
+Internal behavior:
+
+- `triggerVortex(sectionId)` — sets `isVortexActive = true` and stores `sectionId` in a ref
+- `handleComplete()` — scrolls to the target section instantly, then sets `isVortexActive = false`
+  - Use `document.getElementById(sectionId)?.scrollIntoView({ behavior: 'instant' })` for the scroll
+  - Reset `targetSectionId` to `null` after scrolling
+
+Section ID map (use these exact strings as the `sectionId` argument):
+
+| Node label | `sectionId` |
+|------------|------------|
+| About | `about` |
+| Experience | `experience` |
+| Projects | `projects` |
+| Services | `services` |
+| Contact | `contact` |
+
+Ensure each section's root element in its respective component (`About.jsx`, etc.) has a matching `id` attribute — add them if missing.
 
 ---
 
-## Libraries used (no new dependencies)
+## Task 4 — Wire into `GraphView.jsx`
 
-- **Framer Motion 12** — transitions, blob morph, node entrance, flash overlay, `AnimatePresence`
-- **Tailwind CSS 4** — dark utilities, layout, spacing
+**File:** `src/components/GraphView.jsx`
+
+1. Import `VortexTransition` from `../VortexTransition`
+2. Import and call `useVortexNavigation` at the top of the component
+3. Replace each outer node's existing `onClick` with:
+   ```js
+   onClick={() => triggerVortex('sectionId')}
+   ```
+   Use the section ID map from Task 3.
+4. Render at the root of `GraphView.jsx` (outside/above the canvas layer):
+   ```jsx
+   <VortexTransition active={isVortexActive} onComplete={handleComplete} />
+   ```
+5. Remove any Framer Motion `onClick` transition props previously attached to the node elements — the vortex is now the sole navigation transition for graph-mode clicks
+6. Do **not** modify the lightning canvas logic — it should continue running underneath the vortex overlay
 
 ---
 
-## Verification
+## Notes
 
-1. `npm run dev` → open `localhost:3000`
-2. Scroll view loads normally; ViewSwitcher pill visible at top-center of Hero
-3. Click "⚡ Graph" → Flash transition (spark explosion ~600ms) → Graph View appears
-4. Dark cinematic canvas: Hero blob centered, 5 ghost nodes at periphery, lightning edges animating
-5. Blob shapes morph continuously; edges animate flowing electricity
-6. Click "≡ Scroll" → transition back, correct theme restored
-7. Scroll in graph view does nothing
-8. NavBar hidden in graph view
-9. No layout shift or flicker on toggle
-10. Works on mobile (≥394px)
+- The vortex overlay sits above everything (`z-index: 9999`) but the scroll happens during peak opacity so the user never sees it
+- Framer Motion transitions on section content elements (fade-in on mount, etc.) are left untouched — they will still play when the section becomes visible after the scroll
+- The vortex duration is set to **2.8s** — this can be adjusted later by changing the two time constants in `VortexTransition.jsx` (`ENTRY_DURATION` and `EXIT_DURATION`)
+- Canvas must handle window resize: add a `ResizeObserver` or `window.resize` listener that updates `canvas.width` and `canvas.height`

@@ -14,7 +14,7 @@ function buildKeyframes(offset) {
   return [...shifted, shifted[0]]
 }
 
-export default function GhostNode({ label, phaseOffset = 0 }) {
+export default function GhostNode({ label, phaseOffset = 0, onClick }) {
   const keyframes = buildKeyframes(phaseOffset)
   const glowDelay = phaseOffset * 0.4
 
@@ -24,6 +24,7 @@ export default function GhostNode({ label, phaseOffset = 0 }) {
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{ opacity: 1, scale: 1.07, transition: { duration: 0.18, ease: 'easeOut' } }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
+      onClick={onClick}
       className="relative cursor-pointer w-[clamp(140px,15vw,210px)] h-[clamp(140px,15vw,210px)]"
     >
       {/* Electric ambient halo */}

@@ -4,9 +4,6 @@ import { useRef, useEffect } from 'react'
 const EDGE_DEFS = [
   { id: 'hero-about',      from: 'hero', to: 'about' },
   { id: 'hero-experience', from: 'hero', to: 'experience' },
-  { id: 'hero-projects',   from: 'hero', to: 'projects' },
-  { id: 'hero-services',   from: 'hero', to: 'services' },
-  { id: 'hero-contact',    from: 'hero', to: 'contact' },
 ]
 
 // Recursive midpoint displacement — returns array of [x, y] points
