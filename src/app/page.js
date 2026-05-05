@@ -11,9 +11,13 @@ import Toggle from '@/components/sub/Toggle';
 import Load from '@/components/sub/Load';
 import Services from '@/components/Services';
 import Footer from '@/components/Footer';
+import GraphView from '@/components/GraphView';
+import FlashTransition from '@/components/graph/FlashTransition';
 
 export default function Home() {
-  const [id, setId ] = useState(0);
+  const [id, setId]             = useState(0);
+  const [viewMode, setViewMode] = useState('scroll');
+  const [showFlash, setShowFlash] = useState(false);
   const compsRef = useRef(null);
 
   useEffect(() => {
@@ -32,13 +36,31 @@ export default function Home() {
     });
   }, []);
 
+  // Flash only plays when entering graph view, not returning to scroll
+  const switchView = (newMode) => {
+    if (newMode === viewMode) return;
+    if (newMode === 'graph') setShowFlash(true);
+    setViewMode(newMode);
+  };
+
+  // Exit graph view automatically on small screens
+  useEffect(() => {
+    const check = () => {
+      if (window.innerWidth < 1024 && viewMode === 'graph') setViewMode('scroll');
+    };
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [viewMode]);
+
   return (
     <>
       <Load />
+      {showFlash && <FlashTransition onComplete={() => setShowFlash(false)} />}
+      {viewMode === 'graph' && <GraphView onSwitchView={switchView} />}
       <Toggle>
-        <NavBar id={id} />
+        {viewMode === 'scroll' && <NavBar id={id} />}
         <div className="w-full sections-container" ref={compsRef}>
-          <Hero />
+          <Hero viewMode={viewMode} onSwitchView={switchView} />
           <About />
           <Experience />
           <Projects />

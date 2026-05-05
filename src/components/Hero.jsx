@@ -1,11 +1,11 @@
 'use client'
 import Image from "next/image";
-import { heroIcons, heroRoles, heroTechBadges, aboutData, fadeUp, stagger } from "@/assets";
-import { useMotionValue, useTransform, motion, useSpring, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { heroIcons, heroRoles, heroTechBadges, aboutData } from "@/assets";
+import { useMotionValue, useTransform, motion, useSpring, AnimatePresence, useAnimation } from "framer-motion";
+import { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
 import PhotoFrame from "./sub/PhotoFrame";
+import ViewSwitcher from "./graph/ViewSwitcher";
 
-// Hero-specific entry animation (faster stagger + earlier start than default)
 const heroStagger = {
     hidden:   {},
     visible:  { transition: { staggerChildren: 0.1, delayChildren: 0.3 } },
@@ -16,16 +16,49 @@ const heroFadeUp = {
     visible:  { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const Hero = () => {
-    const [buttonHover, setButtonHover]   = useState(false);
-    const [roleIndex,   setRoleIndex]     = useState(0);
+const Hero = ({ viewMode = 'scroll', onSwitchView = () => {} }) => {
+    const [buttonHover, setButtonHover] = useState(false);
+    const [roleIndex,   setRoleIndex]   = useState(0);
 
     useEffect(() => {
         const id = setInterval(() => setRoleIndex(i => (i + 1) % heroRoles.length), 2800);
         return () => clearInterval(id);
     }, []);
 
-    // ── 3D tilt (relative to the image wrapper) ───────────────────────────────
+    // ── Animation controls ────────────────────────────────────────────────────
+    const textControls   = useAnimation();
+    const imageControls  = useAnimation();
+    const scrollControls = useAnimation();
+
+    // Track previous viewMode so we know when returning from graph → scroll
+    const prevModeRef = useRef(viewMode);
+
+    useLayoutEffect(() => {
+        const prevMode = prevModeRef.current;
+        prevModeRef.current = viewMode;
+
+        if (viewMode !== 'scroll') return;
+
+        // Reset to initial states before re-animating (only if coming from graph)
+        if (prevMode === 'graph') {
+            textControls.set('hidden');
+            imageControls.set({ opacity: 0, x: 40 });
+            scrollControls.set({ opacity: 0 });
+        }
+
+        // Play entry animations
+        textControls.start('visible');
+        imageControls.start({
+            opacity: 1, x: 0,
+            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
+        });
+        scrollControls.start({
+            opacity: 1,
+            transition: { delay: 1.6, duration: 0.6 },
+        });
+    }, [viewMode]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    // ── 3D tilt ───────────────────────────────────────────────────────────────
     const imageWrapRef = useRef(null);
     const mx = useMotionValue(0);
     const my = useMotionValue(0);
@@ -46,6 +79,11 @@ const Hero = () => {
             id="home"
             className="relative h-screen flex items-center px-5 sm:p-0"
         >
+            {/* ── View switcher (lg+ only) ──────────────────────────────── */}
+            <div className="hidden lg:block absolute top-5 left-1/2 -translate-x-1/2 z-10">
+                <ViewSwitcher viewMode={viewMode} onSwitch={onSwitchView} />
+            </div>
+
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 <div className="absolute -top-20 right-0 w-120 h-120 rounded-full blur-3xl opacity-[0.07] dark:opacity-[0.12] bg-amber-400" />
@@ -66,7 +104,7 @@ const Hero = () => {
                 <motion.div
                     variants={heroStagger}
                     initial="hidden"
-                    animate="visible"
+                    animate={textControls}
                     className="flex-1 flex flex-col gap-5 text-center lg:text-left"
                 >
                     {/* Available badge */}
@@ -174,8 +212,7 @@ const Hero = () => {
                 {/* ── RIGHT: Image ─────────────────────────────────────────── */}
                 <motion.div
                     initial={{ opacity: 0, x: 40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                    animate={imageControls}
                     ref={imageWrapRef}
                     onMouseMove={onMouseMove}
                     onMouseLeave={onMouseLeave}
@@ -229,8 +266,7 @@ const Hero = () => {
             {/* ── Scroll indicator ──────────────────────────────────────── */}
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.6, duration: 0.6 }}
+                animate={scrollControls}
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
             >
                 <span className="text-[11px] tracking-widest uppercase text-zinc-500 dark:text-zinc-200 font-medium">Scroll</span>
