@@ -21,7 +21,7 @@ export default function GhostNode({ label, phaseOffset = 0 }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 0.82, scale: 1 }}
+      animate={{ opacity: 1, scale: 1 }}
       whileHover={{ opacity: 1, scale: 1.07, transition: { duration: 0.18, ease: 'easeOut' } }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="relative cursor-pointer w-[clamp(140px,15vw,210px)] h-[clamp(140px,15vw,210px)]"
@@ -35,10 +35,7 @@ export default function GhostNode({ label, phaseOffset = 0 }) {
           ease: 'easeInOut',
           delay: glowDelay,
         }}
-        className="absolute -inset-4 rounded-full pointer-events-none blur-[14px]"
-        style={{
-          background: 'radial-gradient(ellipse, rgba(220,38,38,0.2) 0%, rgba(251,191,36,0.09) 50%, transparent 72%)',
-        }}
+        className="absolute -inset-4 rounded-full pointer-events-none blur-[14px] bg-[radial-gradient(ellipse,rgba(220,38,38,0.2)_0%,rgba(251,191,36,0.09)_50%,transparent_72%)]"
       />
 
       {/* Morphing node body */}
@@ -50,13 +47,10 @@ export default function GhostNode({ label, phaseOffset = 0 }) {
           repeat: Infinity,
           repeatType: 'loop',
         }}
-        className="w-full h-full flex items-center justify-center border border-amber-500/40 bg-[#050508]/70"
-        style={{
-          borderRadius: keyframes[0],
-          boxShadow: '0 0 22px rgba(220,38,38,0.12), inset 0 0 14px rgba(251,191,36,0.05)',
-        }}
+        className="group w-full h-full flex items-center justify-center border border-amber-500/40 hover:border-amber-600 bg-[#050508] [box-shadow:0_0_22px_rgba(220,38,38,0.12),inset_0_0_14px_rgba(251,191,36,0.05)]"
+        style={{ borderRadius: keyframes[0] }}
       >
-        <span className="text-[13px] font-medium text-zinc-400 tracking-wide uppercase select-none">
+        <span className="text-[13px] font-medium group-hover:text-zinc-100 text-zinc-400 tracking-wide uppercase select-none transition-all">
           {label}
         </span>
       </motion.div>

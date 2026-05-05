@@ -26,21 +26,16 @@ export default function FlashTransition({ onComplete }) {
   const angles = Array.from({ length: 10 }, (_, i) => i * 36 + 9)
 
   return (
-    <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
+    <div className="fixed inset-0 pointer-events-none z-[9999]">
       <motion.div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(245,158,11,0.5) 40%, transparent 72%)',
-        }}
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.9)_0%,rgba(245,158,11,0.5)_40%,transparent_72%)]"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.9, 0] }}
         transition={{ duration: 0.42, times: [0, 0.25, 1] }}
       />
       <svg
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full overflow-visible"
         viewBox="-500 -500 1000 1000"
-        style={{ overflow: 'visible' }}
       >
         <defs>
           <filter id="flashGlow">

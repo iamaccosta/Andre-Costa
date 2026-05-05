@@ -25,22 +25,22 @@ function displace(x1, y1, x2, y2, roughness, depth) {
 }
 
 function makeBolts(x1, y1, x2, y2) {
-  const main = displace(x1, y1, x2, y2, 0.38, 5)
+  const main = displace(x1, y1, x2, y2, 0.15, 5)
   const totalLen = Math.hypot(x2 - x1, y2 - y1)
   const branches = []
   const count = 2 + Math.floor(Math.random() * 2)
-  const lo = Math.floor(main.length * 0.2)
-  const hi = Math.floor(main.length * 0.78)
+  const lo = Math.floor(main.length * 0)
+  const hi = Math.floor(main.length * 0.8)
 
   for (let i = 0; i < count; i++) {
     const idx = lo + Math.floor(Math.random() * Math.max(1, hi - lo - 1))
     const [bx, by]   = main[idx]
     const [bx2, by2] = main[Math.min(idx + 1, main.length - 1)]
     const mainAng = Math.atan2(by2 - by, bx2 - bx)
-    const diverge = (Math.random() > 0.5 ? 1 : -1) * (0.4 + Math.random() * 0.9)
-    const bLen = totalLen * (0.12 + Math.random() * 0.2)
+    const diverge = (Math.random() > 0.5 ? 1 : -1) * (0.2 + Math.random() * 0.4)
+    const bLen = totalLen * (0.10 + Math.random() * 0.15)
     branches.push(
-      displace(bx, by, bx + Math.cos(mainAng + diverge) * bLen, by + Math.sin(mainAng + diverge) * bLen, 0.45, 3)
+      displace(bx, by, bx + Math.cos(mainAng + diverge) * bLen, by + Math.sin(mainAng + diverge) * bLen, 0.70, 5)
     )
   }
 
@@ -54,13 +54,12 @@ function tracePath(ctx, pts) {
   for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1])
 }
 
-function drawEdge(ctx, { main, branches }, alpha) {
+function drawEdge(ctx, { main, branches }) {
   ctx.save()
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
 
   // Outer orange glow halo
-  ctx.globalAlpha = alpha
   ctx.shadowColor = 'rgba(255, 110, 20, 0.7)'
   ctx.shadowBlur = 14
   ctx.strokeStyle = 'rgba(255, 100, 20, 0.3)'
@@ -78,7 +77,7 @@ function drawEdge(ctx, { main, branches }, alpha) {
 
   // Branches — no shadow, thin
   ctx.shadowBlur = 0
-  ctx.globalAlpha = alpha * 0.38
+  ctx.globalAlpha = 0.38
   ctx.strokeStyle = 'rgba(255, 185, 60, 1)'
   ctx.lineWidth = 0.9
   for (const b of branches) {
@@ -89,35 +88,22 @@ function drawEdge(ctx, { main, branches }, alpha) {
   ctx.restore()
 }
 
-// Regen interval: ~111–167ms
+// Regen interval: 100–150ms baseline scaled up by 1/0.9 → ~111–167ms
 function nextInterval() {
   return (100 + Math.random() * 50) / 0.9
 }
 
-const BASE_ALPHA  = 0.6
-const PULSE_DUR   = 700  // ms — sine-wave rise and fall
-// Gap between pulses: 2–6s, staggered per edge
-function nextPulseGap() { return 2000 + Math.random() * 4000 }
-
 export default function LightningCanvas({ nodes }) {
   const canvasRef = useRef(null)
-  const nodesRef  = useRef(nodes)
-  const stRef     = useRef(null)
+  const nodesRef  = useRef(nodes)  // nodes is a stable constant — no update needed
+  const stRef     = useRef(null)   // initialized inside the effect below
 
   useEffect(() => {
-    const now = performance.now()
-    const st = {
-      bolts: {}, lastRegen: {}, nextRegen: {},
-      pulseAt: {}, nextPulseAt: {},
-      forceRegen: false,
+    const st = { bolts: {}, lastRegen: {}, nextRegen: {}, forceRegen: false }
+    for (const { id } of EDGE_DEFS) {
+      st.lastRegen[id] = 0
+      st.nextRegen[id] = nextInterval()
     }
-    EDGE_DEFS.forEach(({ id }, i) => {
-      st.lastRegen[id]   = 0
-      st.nextRegen[id]   = nextInterval()
-      st.pulseAt[id]     = null
-      // Stagger initial pulses so edges don't flash simultaneously
-      st.nextPulseAt[id] = now + 600 + i * 700 + Math.random() * 1500
-    })
     stRef.current = st
 
     const canvas = canvasRef.current
@@ -145,31 +131,15 @@ export default function LightningCanvas({ nodes }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       for (const { id, from, to } of EDGE_DEFS) {
-        // --- Pulse alpha ---
-        let alpha = BASE_ALPHA
-        if (st.pulseAt[id] !== null) {
-          const elapsed = now - st.pulseAt[id]
-          if (elapsed >= PULSE_DUR) {
-            st.pulseAt[id]     = null
-            st.nextPulseAt[id] = now + nextPulseGap()
-          } else {
-            // Smooth sine bell: 0.6 → 1.0 → 0.6
-            alpha = BASE_ALPHA + (1 - BASE_ALPHA) * Math.sin((elapsed / PULSE_DUR) * Math.PI)
-          }
-        } else if (now >= st.nextPulseAt[id]) {
-          st.pulseAt[id] = now
-        }
-
-        // --- Regen bolt path ---
         if (!st.bolts[id] || st.forceRegen || now - st.lastRegen[id] > st.nextRegen[id]) {
           const [x1, y1] = px(from)
           const [x2, y2] = px(to)
-          st.bolts[id]   = makeBolts(x1, y1, x2, y2)
-          st.lastRegen[id]  = now
-          st.nextRegen[id]  = nextInterval()
+          st.bolts[id] = makeBolts(x1, y1, x2, y2)
+          st.lastRegen[id] = now
+          st.nextRegen[id] = nextInterval()
         }
 
-        drawEdge(ctx, st.bolts[id], alpha)
+        drawEdge(ctx, st.bolts[id])
       }
 
       st.forceRegen = false
@@ -186,7 +156,7 @@ export default function LightningCanvas({ nodes }) {
   return (
     <canvas
       ref={canvasRef}
-      style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1 }}
+      className="absolute inset-0 pointer-events-none z-1"
     />
   )
 }
