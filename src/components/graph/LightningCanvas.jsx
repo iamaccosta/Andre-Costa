@@ -2,16 +2,11 @@
 import { useRef, useEffect } from 'react'
 
 const EDGE_DEFS = [
-  { id: 'hero-about',          from: 'hero',       to: 'about' },
-  { id: 'hero-experience',     from: 'hero',       to: 'experience' },
-  { id: 'hero-projects',       from: 'hero',       to: 'projects' },
-  { id: 'hero-services',       from: 'hero',       to: 'services' },
-  { id: 'hero-contact',        from: 'hero',       to: 'contact' },
-  { id: 'about-experience',    from: 'about',      to: 'experience' },
-  { id: 'experience-projects', from: 'experience', to: 'projects' },
-  { id: 'projects-services',   from: 'projects',   to: 'services' },
-  { id: 'services-contact',    from: 'services',   to: 'contact' },
-  { id: 'contact-about',       from: 'contact',    to: 'about' },
+  { id: 'hero-about',      from: 'hero', to: 'about' },
+  { id: 'hero-experience', from: 'hero', to: 'experience' },
+  { id: 'hero-projects',   from: 'hero', to: 'projects' },
+  { id: 'hero-services',   from: 'hero', to: 'services' },
+  { id: 'hero-contact',    from: 'hero', to: 'contact' },
 ]
 
 // Recursive midpoint displacement — returns array of [x, y] points
@@ -59,12 +54,13 @@ function tracePath(ctx, pts) {
   for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1])
 }
 
-function drawEdge(ctx, { main, branches }) {
+function drawEdge(ctx, { main, branches }, alpha) {
   ctx.save()
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
 
   // Outer orange glow halo
+  ctx.globalAlpha = alpha
   ctx.shadowColor = 'rgba(255, 110, 20, 0.7)'
   ctx.shadowBlur = 14
   ctx.strokeStyle = 'rgba(255, 100, 20, 0.3)'
@@ -82,7 +78,7 @@ function drawEdge(ctx, { main, branches }) {
 
   // Branches — no shadow, thin
   ctx.shadowBlur = 0
-  ctx.globalAlpha = 0.38
+  ctx.globalAlpha = alpha * 0.38
   ctx.strokeStyle = 'rgba(255, 185, 60, 1)'
   ctx.lineWidth = 0.9
   for (const b of branches) {
@@ -93,22 +89,35 @@ function drawEdge(ctx, { main, branches }) {
   ctx.restore()
 }
 
-// Regen interval: 80–120ms baseline scaled up by 1/0.8 → 100–150ms
+// Regen interval: ~111–167ms
 function nextInterval() {
-  return 100 + Math.random() * 50
+  return (100 + Math.random() * 50) / 0.9
 }
+
+const BASE_ALPHA  = 0.6
+const PULSE_DUR   = 700  // ms — sine-wave rise and fall
+// Gap between pulses: 2–6s, staggered per edge
+function nextPulseGap() { return 2000 + Math.random() * 4000 }
 
 export default function LightningCanvas({ nodes }) {
   const canvasRef = useRef(null)
-  const nodesRef  = useRef(nodes)  // nodes is a stable constant — no update needed
-  const stRef     = useRef(null)   // initialized inside the effect below
+  const nodesRef  = useRef(nodes)
+  const stRef     = useRef(null)
 
   useEffect(() => {
-    const st = { bolts: {}, lastRegen: {}, nextRegen: {}, forceRegen: false }
-    for (const { id } of EDGE_DEFS) {
-      st.lastRegen[id] = 0
-      st.nextRegen[id] = nextInterval()
+    const now = performance.now()
+    const st = {
+      bolts: {}, lastRegen: {}, nextRegen: {},
+      pulseAt: {}, nextPulseAt: {},
+      forceRegen: false,
     }
+    EDGE_DEFS.forEach(({ id }, i) => {
+      st.lastRegen[id]   = 0
+      st.nextRegen[id]   = nextInterval()
+      st.pulseAt[id]     = null
+      // Stagger initial pulses so edges don't flash simultaneously
+      st.nextPulseAt[id] = now + 600 + i * 700 + Math.random() * 1500
+    })
     stRef.current = st
 
     const canvas = canvasRef.current
@@ -136,15 +145,31 @@ export default function LightningCanvas({ nodes }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       for (const { id, from, to } of EDGE_DEFS) {
+        // --- Pulse alpha ---
+        let alpha = BASE_ALPHA
+        if (st.pulseAt[id] !== null) {
+          const elapsed = now - st.pulseAt[id]
+          if (elapsed >= PULSE_DUR) {
+            st.pulseAt[id]     = null
+            st.nextPulseAt[id] = now + nextPulseGap()
+          } else {
+            // Smooth sine bell: 0.6 → 1.0 → 0.6
+            alpha = BASE_ALPHA + (1 - BASE_ALPHA) * Math.sin((elapsed / PULSE_DUR) * Math.PI)
+          }
+        } else if (now >= st.nextPulseAt[id]) {
+          st.pulseAt[id] = now
+        }
+
+        // --- Regen bolt path ---
         if (!st.bolts[id] || st.forceRegen || now - st.lastRegen[id] > st.nextRegen[id]) {
           const [x1, y1] = px(from)
           const [x2, y2] = px(to)
-          st.bolts[id] = makeBolts(x1, y1, x2, y2)
-          st.lastRegen[id] = now
-          st.nextRegen[id] = nextInterval()
+          st.bolts[id]   = makeBolts(x1, y1, x2, y2)
+          st.lastRegen[id]  = now
+          st.nextRegen[id]  = nextInterval()
         }
 
-        drawEdge(ctx, st.bolts[id])
+        drawEdge(ctx, st.bolts[id], alpha)
       }
 
       st.forceRegen = false

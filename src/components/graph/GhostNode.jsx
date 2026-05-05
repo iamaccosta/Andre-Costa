@@ -20,33 +20,24 @@ export default function GhostNode({ label, phaseOffset = 0 }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 0.65 }}
-      transition={{ duration: 0.8, delay: 0.8 + phaseOffset * 0.12 }}
-      style={{
-        width: 'clamp(110px, 11vw, 160px)',
-        height: 'clamp(110px, 11vw, 160px)',
-        cursor: 'default',
-        pointerEvents: 'none',
-        position: 'relative',
-      }}
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={{ opacity: 0.82, scale: 1 }}
+      whileHover={{ opacity: 1, scale: 1.07, transition: { duration: 0.18, ease: 'easeOut' } }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="relative cursor-pointer w-[clamp(140px,15vw,210px)] h-[clamp(140px,15vw,210px)]"
     >
-      {/* Electric ambient halo — warm red/amber to match spark color */}
+      {/* Electric ambient halo */}
       <motion.div
-        animate={{ opacity: [0.25, 0.6, 0.25], scale: [1, 1.2, 1] }}
+        animate={{ opacity: [0.3, 0.65, 0.3], scale: [1, 1.18, 1] }}
         transition={{
           duration: 2.8 + phaseOffset * 0.35,
           repeat: Infinity,
           ease: 'easeInOut',
           delay: glowDelay,
         }}
+        className="absolute -inset-4 rounded-full pointer-events-none blur-[14px]"
         style={{
-          position: 'absolute',
-          inset: '-14px',
-          borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(220,38,38,0.18) 0%, rgba(251,191,36,0.08) 50%, transparent 72%)',
-          filter: 'blur(12px)',
-          pointerEvents: 'none',
+          background: 'radial-gradient(ellipse, rgba(220,38,38,0.2) 0%, rgba(251,191,36,0.09) 50%, transparent 72%)',
         }}
       />
 
@@ -59,15 +50,13 @@ export default function GhostNode({ label, phaseOffset = 0 }) {
           repeat: Infinity,
           repeatType: 'loop',
         }}
-        className="w-full h-full flex items-center justify-center"
+        className="w-full h-full flex items-center justify-center border border-amber-500/40 bg-[#050508]/70"
         style={{
-          border: '1px solid rgba(245, 158, 11, 0.3)',
-          background: 'rgba(5, 5, 8, 0.65)',
           borderRadius: keyframes[0],
-          boxShadow: '0 0 18px rgba(220,38,38,0.1), inset 0 0 12px rgba(251,191,36,0.04)',
+          boxShadow: '0 0 22px rgba(220,38,38,0.12), inset 0 0 14px rgba(251,191,36,0.05)',
         }}
       >
-        <span className="text-[10px] font-medium text-zinc-500 tracking-wide uppercase select-none">
+        <span className="text-[13px] font-medium text-zinc-400 tracking-wide uppercase select-none">
           {label}
         </span>
       </motion.div>

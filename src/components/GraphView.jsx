@@ -8,11 +8,11 @@ import ViewSwitcher from './graph/ViewSwitcher'
 // All positions as percentages (0–100) of viewport
 const NODES = {
   hero:       { x: 50, y: 50 },
-  about:      { x: 27, y: 15 },
-  experience: { x: 73, y: 15 },
-  projects:   { x: 88, y: 54 },
-  services:   { x: 73, y: 85 },
-  contact:    { x: 27, y: 85 },
+  about:      { x: 14, y: 14 },
+  experience: { x: 86, y: 14 },
+  projects:   { x: 93, y: 52 },
+  services:   { x: 86, y: 86 },
+  contact:    { x: 14, y: 86 },
 }
 
 const GHOSTS = [
@@ -33,15 +33,11 @@ export default function GraphView({ onSwitchView }) {
   }, [])
 
   return (
-    <div
-      className="fixed inset-0 overflow-hidden"
-      style={{ background: '#050508', zIndex: 60, touchAction: 'none' }}
-    >
+    <div className="fixed inset-0 overflow-hidden bg-[#050508] z-60 touch-none">
       {/* Ambient glow + dot grid */}
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 rounded-full blur-3xl"
-          style={{ background: 'rgba(245,158,11,0.07)' }}
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 rounded-full blur-3xl bg-amber-500/[0.07]"
         />
         <div
           className="absolute inset-0 opacity-[0.018]"
@@ -56,15 +52,11 @@ export default function GraphView({ onSwitchView }) {
       <LightningCanvas nodes={NODES} />
 
       {/* Node layer */}
-      <div className="absolute inset-0" style={{ zIndex: 2 }}>
+      <div className="absolute inset-0 z-2">
         {/* Hero node — center */}
         <div
-          className="absolute"
-          style={{
-            left: `${NODES.hero.x}%`,
-            top:  `${NODES.hero.y}%`,
-            transform: 'translate(-50%, -50%)',
-          }}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
+          style={{ left: `${NODES.hero.x}%`, top: `${NODES.hero.y}%` }}
         >
           <HeroNode />
         </div>
@@ -73,12 +65,8 @@ export default function GraphView({ onSwitchView }) {
         {GHOSTS.map((g) => (
           <div
             key={g.key}
-            className="absolute"
-            style={{
-              left: `${NODES[g.key].x}%`,
-              top:  `${NODES[g.key].y}%`,
-              transform: 'translate(-50%, -50%)',
-            }}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: `${NODES[g.key].x}%`, top: `${NODES[g.key].y}%` }}
           >
             <GhostNode label={g.label} phaseOffset={g.phase} />
           </div>
