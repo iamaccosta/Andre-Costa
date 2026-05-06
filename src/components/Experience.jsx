@@ -145,7 +145,7 @@ const Experience = () => {
     const scaleY = useSpring(scrollYProgress, { stiffness: 160, damping: 24 })
 
     return (
-        <div id="experience" className="relative xs:py-20 md:py-10 overflow-hidden">
+        <div id="experience" className="relative md:py-0 xs:py-10 overflow-hidden">
 
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">

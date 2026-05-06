@@ -77,7 +77,7 @@ const Hero = ({ viewMode = 'scroll', onSwitchView = () => {} }) => {
     return (
         <div
             id="home"
-            className="relative h-screen flex items-center px-5 sm:p-0"
+            className="relative h-screen flex items-center px-5 md:py-0 xs:py-10 sm:px-0 "
         >
             {/* ── View switcher (lg+ only) ──────────────────────────────── */}
             <div className="hidden lg:block absolute top-5 left-1/2 -translate-x-1/2 z-10">
