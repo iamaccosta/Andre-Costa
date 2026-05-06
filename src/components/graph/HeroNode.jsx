@@ -34,7 +34,7 @@ export default function HeroNode() {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.4 }}
       
-      className="w-[clamp(420px,46vw,660px)] h-[clamp(320px,34vw,500px)]"
+      className="w-[clamp(520px,56vw,800px)] h-[clamp(400px,44vw,620px)]"
     >
       {/* Gradient border wrapper — morphs continuously */}
       <motion.div
@@ -70,12 +70,12 @@ export default function HeroNode() {
             </span>
 
             {/* Name */}
-            <h2 className="text-white font-extrabold text-3xl leading-tight tracking-tight text-center">
+            <h2 className="text-white font-extrabold text-4xl leading-tight tracking-tight text-center">
               André C. Costa
             </h2>
 
             {/* Animated role */}
-            <div className="h-5 overflow-hidden w-full">
+            <div className="h-6 overflow-hidden w-full">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={roleIndex}
@@ -83,7 +83,7 @@ export default function HeroNode() {
                   animate={{ y: 0,   opacity: 1 }}
                   exit={{    y: -14, opacity: 0 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-sm font-semibold tracking-widest uppercase text-amber-500 text-center truncate"
+                  className="text-base font-semibold tracking-widest uppercase text-amber-500 text-center truncate"
                 >
                   {heroRoles[roleIndex]}
                 </motion.p>
@@ -97,10 +97,10 @@ export default function HeroNode() {
             <div className="flex items-start gap-5">
               {aboutData.slice(0, 3).map((stat) => (
                 <div key={stat.title} className="flex flex-col items-center gap-0.5">
-                  <span className="text-xl font-bold text-white leading-none">
+                  <span className="text-2xl font-bold text-white leading-none">
                     {stat.amount}<span className="text-amber-500">+</span>
                   </span>
-                  <span className="text-[9px] font-medium text-zinc-500 uppercase tracking-wide text-center leading-tight max-w-12">
+                  <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wide text-center leading-tight max-w-14">
                     {stat.title}
                   </span>
                 </div>

@@ -1,10 +1,5 @@
 'use client'
-import { useRef, useEffect } from 'react'
-
-const EDGE_DEFS = [
-  { id: 'hero-about',      from: 'hero', to: 'about' },
-  { id: 'hero-experience', from: 'hero', to: 'experience' },
-]
+import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
 
 // Recursive midpoint displacement — returns array of [x, y] points
 function displace(x1, y1, x2, y2, roughness, depth) {
@@ -51,28 +46,25 @@ function tracePath(ctx, pts) {
   for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1])
 }
 
-function drawEdge(ctx, { main, branches }) {
+function drawEdge(ctx, { main, branches }, bright = false) {
   ctx.save()
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
 
-  // Outer orange glow halo
   ctx.shadowColor = 'rgba(255, 110, 20, 0.7)'
   ctx.shadowBlur = 14
   ctx.strokeStyle = 'rgba(255, 100, 20, 0.3)'
-  ctx.lineWidth = 4
+  ctx.lineWidth = bright ? 7.2 : 4
   tracePath(ctx, main)
   ctx.stroke()
 
-  // Gold core
   ctx.shadowColor = 'rgba(255, 230, 80, 0.9)'
   ctx.shadowBlur = 5
-  ctx.strokeStyle = 'rgba(255, 200, 80, 0.9)'
-  ctx.lineWidth = 1.5
+  ctx.strokeStyle = bright ? 'rgba(255, 240, 120, 1)' : 'rgba(255, 200, 80, 0.9)'
+  ctx.lineWidth = bright ? 2.7 : 1.5
   tracePath(ctx, main)
   ctx.stroke()
 
-  // Branches — no shadow, thin
   ctx.shadowBlur = 0
   ctx.globalAlpha = 0.38
   ctx.strokeStyle = 'rgba(255, 185, 60, 1)'
@@ -85,19 +77,61 @@ function drawEdge(ctx, { main, branches }) {
   ctx.restore()
 }
 
-// Regen interval: 100–150ms baseline scaled up by 1/0.9 → ~111–167ms
 function nextInterval() {
   return (100 + Math.random() * 50) / 0.9
 }
 
-export default function LightningCanvas({ nodes }) {
-  const canvasRef = useRef(null)
-  const nodesRef  = useRef(nodes)  // nodes is a stable constant — no update needed
-  const stRef     = useRef(null)   // initialized inside the effect below
+const LightningCanvas = forwardRef(function LightningCanvas({ nodes, edges }, ref) {
+  const canvasRef      = useRef(null)
+  const nodesRef       = useRef(nodes)
+  const edgesRef       = useRef(edges)
+  const stRef          = useRef(null)
+  const frozenBoltsRef = useRef({})
+
+  useEffect(() => {
+    nodesRef.current = nodes
+    if (stRef.current) stRef.current.forceRegen = true
+  }, [nodes])
+
+  useEffect(() => {
+    edgesRef.current = edges
+    const st = stRef.current
+    if (!st) return
+    const newIds = new Set(edges.map(e => e.id))
+    for (const id of Object.keys(st.bolts)) {
+      if (!newIds.has(id)) delete st.bolts[id]
+    }
+    for (const id of Object.keys(st.lastRegen)) {
+      if (!newIds.has(id)) {
+        delete st.lastRegen[id]
+        delete st.nextRegen[id]
+      }
+    }
+    for (const { id } of edges) {
+      if (!(id in st.lastRegen)) {
+        st.lastRegen[id] = 0
+        st.nextRegen[id] = nextInterval()
+      }
+    }
+    st.forceRegen = true
+  }, [edges])
+
+  useImperativeHandle(ref, () => ({
+    freeze(edgeId) {
+      const st = stRef.current
+      if (!st?.bolts[edgeId]) return []
+      const bolt = st.bolts[edgeId]
+      frozenBoltsRef.current[edgeId] = { main: bolt.main.slice(), branches: bolt.branches }
+      return bolt.main.slice()
+    },
+    release(edgeId) {
+      delete frozenBoltsRef.current[edgeId]
+    },
+  }))
 
   useEffect(() => {
     const st = { bolts: {}, lastRegen: {}, nextRegen: {}, forceRegen: false }
-    for (const { id } of EDGE_DEFS) {
+    for (const { id } of edgesRef.current) {
       st.lastRegen[id] = 0
       st.nextRegen[id] = nextInterval()
     }
@@ -124,19 +158,23 @@ export default function LightningCanvas({ nodes }) {
 
     let rafId
     function frame(now) {
-      const st = stRef.current
+      const st     = stRef.current
+      const frozen = frozenBoltsRef.current
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      for (const { id, from, to } of EDGE_DEFS) {
-        if (!st.bolts[id] || st.forceRegen || now - st.lastRegen[id] > st.nextRegen[id]) {
-          const [x1, y1] = px(from)
-          const [x2, y2] = px(to)
-          st.bolts[id] = makeBolts(x1, y1, x2, y2)
-          st.lastRegen[id] = now
-          st.nextRegen[id] = nextInterval()
+      for (const { id, from, to } of edgesRef.current) {
+        if (frozen[id]) {
+          drawEdge(ctx, frozen[id], true)
+        } else {
+          if (!st.bolts[id] || st.forceRegen || now - st.lastRegen[id] > st.nextRegen[id]) {
+            const [x1, y1] = px(from)
+            const [x2, y2] = px(to)
+            st.bolts[id] = makeBolts(x1, y1, x2, y2)
+            st.lastRegen[id] = now
+            st.nextRegen[id] = nextInterval()
+          }
+          drawEdge(ctx, st.bolts[id], false)
         }
-
-        drawEdge(ctx, st.bolts[id])
       }
 
       st.forceRegen = false
@@ -156,4 +194,6 @@ export default function LightningCanvas({ nodes }) {
       className="absolute inset-0 pointer-events-none z-1"
     />
   )
-}
+})
+
+export default LightningCanvas
