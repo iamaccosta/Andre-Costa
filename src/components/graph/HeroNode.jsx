@@ -46,7 +46,7 @@ export default function HeroNode() {
         <motion.div
           animate={{ borderRadius: BLOB_KEYFRAMES }}
           transition={blobTransition}
-          className="w-full h-full flex flex-row overflow-hidden bg-[#050508]"
+          className="w-full h-full flex flex-row overflow-hidden bg-zinc-950"
           style={{ borderRadius: BLOB_KEYFRAMES[0] }}
         >
           {/* Photo — left panel, fills full height */}
@@ -58,7 +58,7 @@ export default function HeroNode() {
               className="object-cover object-top"
             />
             {/* Fade image edge into background */}
-            <div className="absolute inset-y-0 right-0 w-10 bg-linear-to-r from-transparent to-[#050508]" />
+            <div className="absolute inset-y-0 right-0 w-10 bg-linear-to-r from-transparent to-zinc-950" />
           </div>
 
           {/* Content — right panel */}

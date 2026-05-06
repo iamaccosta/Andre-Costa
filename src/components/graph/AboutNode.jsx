@@ -38,7 +38,7 @@ export default function AboutNode() {
         <motion.div
           animate={{ borderRadius: BLOB_KEYFRAMES }}
           transition={blobTransition}
-          className="w-full h-full flex flex-row overflow-hidden bg-[#050508]"
+          className="w-full h-full flex flex-row overflow-hidden bg-zinc-950"
           style={{ borderRadius: BLOB_KEYFRAMES[0] }}
         >
           {/* Photo — left panel, fills full height */}
@@ -49,7 +49,7 @@ export default function AboutNode() {
               fill
               className="object-cover object-top"
             />
-            <div className="absolute inset-y-0 right-0 w-10 bg-linear-to-r from-transparent to-[#050508]" />
+            <div className="absolute inset-y-0 right-0 w-10 bg-linear-to-r from-transparent to-zinc-950" />
           </div>
 
           {/* Content — right panel */}
@@ -94,7 +94,7 @@ export default function AboutNode() {
                   key={tag}
                   className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-wide px-2 py-1 rounded-full border border-zinc-700/60 text-zinc-300 bg-zinc-800/40"
                 >
-                  <span className="w-1 h-1 rounded-full shrink-0 bg-gradient-to-br from-amber-400 to-red-500" />
+                  <span className="w-1 h-1 rounded-full shrink-0 bg-linear-to-br from-amber-400 to-red-500" />
                   {tag}
                 </span>
               ))}

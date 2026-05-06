@@ -3,7 +3,7 @@
 export default function ViewSwitcher({ viewMode, onSwitch }) {
   return (
     <div
-      className="inline-flex items-center rounded-full border border-amber-500/30 bg-black/60 backdrop-blur-sm p-0.75 gap-0.5"
+      className="max-[1440px]:hidden inline-flex items-center rounded-full border border-amber-500/30 bg-black/60 backdrop-blur-sm p-0.75 gap-0.5"
     >
       {[
         { mode: 'scroll', label: '≡ Scroll' },

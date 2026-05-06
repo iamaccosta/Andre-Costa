@@ -36,17 +36,22 @@ export default function Home() {
     });
   }, []);
 
+  const MIN_GRAPH_WIDTH = 1440;
+
   // Flash only plays when entering graph view, not returning to scroll
   const switchView = (newMode) => {
     if (newMode === viewMode) return;
-    if (newMode === 'graph') setShowFlash(true);
+    if (newMode === 'graph') {
+      if (window.innerWidth < MIN_GRAPH_WIDTH) return;
+      setShowFlash(true);
+    }
     setViewMode(newMode);
   };
 
   // Exit graph view automatically on small screens
   useEffect(() => {
     const check = () => {
-      if (window.innerWidth < 1024 && viewMode === 'graph') setViewMode('scroll');
+      if (window.innerWidth < MIN_GRAPH_WIDTH && viewMode === 'graph') setViewMode('scroll');
     };
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);

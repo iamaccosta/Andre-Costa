@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import HeroNode from './graph/HeroNode'
 import GhostNode from './graph/GhostNode'
 import AboutNode from './graph/AboutNode'
+import ExperienceNode from './graph/ExperienceNode'
 import LightningCanvas from './graph/LightningCanvas'
 import ViewSwitcher from './graph/ViewSwitcher'
 import OrbTransition from './graph/OrbTransition'
@@ -19,12 +20,12 @@ const LAYOUTS = {
     CenterComp: HeroNode,
     nodes: {
       hero:       { x: 50, y: 50 },
-      about:      { x: 80, y: 20 },
+      about:      { x: 87, y: 13 },
       experience: { x: 95, y: 90 },
     },
     ghosts: [
-      { key: 'about',      label: 'About',      phase: 0, x: '80vw',  y: '20vh' },
-      { key: 'experience', label: 'Experience', phase: 1, x: '95vw',  y: '90vh' },
+      { key: 'about',      label: 'About',      phase: 0, x: '87vw', y: '13vh' },
+      { key: 'experience', label: 'Experience', phase: 1, x: '95vw', y: '90vh' },
     ],
     edges: [
       { id: 'center-about',      from: 'hero', to: 'about' },
@@ -35,11 +36,11 @@ const LAYOUTS = {
     CenterComp: AboutNode,
     nodes: {
       about:      { x: 50, y: 50 },
-      hero:       { x: 20, y: 80 },
+      hero:       { x: 15, y: 85 },
       experience: { x: 65, y: 120 },
     },
     ghosts: [
-      { key: 'hero',       label: 'Hero',       phase: 0, x: '20vw', y: '80vh' },
+      { key: 'hero',       label: 'Hero',       phase: 0, x: '15vw', y: '85vh' },
       { key: 'experience', label: 'Experience', phase: 1, x: '65vw', y: '120vh' },
     ],
     edges: [
@@ -47,6 +48,22 @@ const LAYOUTS = {
       { id: 'center-experience', from: 'about', to: 'experience' },
     ],
   },
+  experience: {
+    CenterComp: ExperienceNode,
+    nodes: {
+      experience: { x: 50, y: 50 },
+      hero:       { x: 5, y: 10 },
+      about:      { x: 35, y: -20 },
+    },
+    ghosts: [
+      { key: 'hero',   label: 'Hero',   phase: 0, x: '5vw', y: '10vh' },
+      { key: 'about',  label: 'About',  phase: 1, x: '35vw', y: '-20vh' },
+    ],
+    edges: [
+      { id: 'center-hero',   from: 'experience', to: 'hero' },
+      { id: 'center-about',  from: 'experience', to: 'about' },
+    ],
+  }
 }
 
 export default function GraphView({ onSwitchView }) {
@@ -114,7 +131,7 @@ export default function GraphView({ onSwitchView }) {
   }
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-[#050508] z-60 touch-none">
+    <div className="fixed inset-0 overflow-hidden bg-zinc-900 z-60 touch-none">
       {/* Ambient glow + dot grid */}
       <div className="pointer-events-none absolute inset-0">
         <div
