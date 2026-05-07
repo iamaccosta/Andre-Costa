@@ -71,7 +71,7 @@ const NavBar = ({ id }) => (
 
         {/* ── Copyright ─────────────────────────────────────────────── */}
         <div className="flex items-center justify-center">
-            <span className="absolute left-1/2 w-max flex items-center gap-0.5 -rotate-90 origin-bottom-left text-[10px] tracking-widest text-zinc-300 dark:text-zinc-700 transition-colors duration-300">
+            <span className="absolute left-2/3 w-max flex items-center gap-0.5 -rotate-90 origin-bottom-left text-[10px] tracking-widest text-zinc-300 dark:text-zinc-700 transition-colors duration-300">
                 {copyRightIcon} 2019 – {new Date().getFullYear()}
             </span>
         </div>

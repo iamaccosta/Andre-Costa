@@ -10,7 +10,7 @@ const About = () => {
     const [intro, stack, closing] = aboutText.split('\n\n');
 
     return (
-        <div id="about" className="relative min-h-screen flex flex-col justify-center gap-y-10 overflow-hidden">
+        <div id="about" className="relative min-h-screen flex flex-col justify-center md:py-0 xs:py-10 gap-y-10 overflow-hidden">
 
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">

@@ -358,7 +358,19 @@ export const projectsData = [
     tech: ['Java', 'Spring Boot', 'AAS', 'PLC Drivers', 'REST'],
     status: 'prototype',
   },
-
+  {
+    name: 'MQTT-PLC Pipeline',
+    summary:
+      'Industrial application connecting MQTT Broker with Siemens S7 PLCs for real-time monitoring and control.',
+    highlights: [
+      'Implemented a bridge between MQTT and PLC, in Pythonusing snap-7 for Siemens S7 integration enabling bidirectional communication.',
+      'This implementation has room to scale to several communication protocols and enables MQTT\'s topic configuration.'
+    ],
+    domain: 'IoT',
+    source: 'professional',
+    tech: ['Java', 'Spring Boot', 'AAS', 'PLC Drivers', 'REST'],
+    status: 'prototype',
+  },
   {
     name: 'AAS for Bio-Products in Aquaculture',
     summary:
@@ -443,6 +455,44 @@ export const projectSourceConfig = {
   professional: { label: 'Professional', color: '#34d399' },
   course:       { label: 'Course',       color: '#f472b6' },
 }
+
+// Research Services
+export const researchServicesData = [
+  {
+    icon: '🔬',
+    title: 'Digital Twin Consulting',
+    description: 'Advisory on AAS-based Digital Twin architectures for industrial environments and Industry 4.0 roadmaps.',
+    tech: ['AAS', 'IIoT', 'Industry 4.0'],
+  },
+  {
+    icon: '🤝',
+    title: 'Research Collaboration',
+    description: 'Academic and R&D partnerships for joint research proposals, prototyping, and knowledge transfer.',
+    tech: ['Academic', 'R&D', 'Prototyping'],
+  },
+  {
+    icon: '⚡',
+    title: 'IIoT System Prototyping',
+    description: 'Design and implementation of data pipelines and monitoring stacks for industrial IoT contexts.',
+    tech: ['MQTT', 'Kafka', 'Spring Boot'],
+  },
+]
+
+// Mobile Services
+export const mobileServicesData = [
+  {
+    icon: '📱',
+    title: 'Android Development',
+    description: 'Native Android apps built with Kotlin and modern architecture patterns, focused on performance and maintainability.',
+    tech: ['Kotlin', 'Android SDK', 'Jetpack', 'MVVM'],
+  },
+  {
+    icon: '🎨',
+    title: 'Mobile App Design',
+    description: 'User-centered mobile UI/UX design with Figma, aligned with Material You guidelines and real usage patterns.',
+    tech: ['UI/UX', 'Figma', 'Material You'],
+  },
+]
 
 // Pricing Plans
 import CheckLineIcon    from 'remixicon-react/CheckLineIcon'
