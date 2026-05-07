@@ -358,7 +358,19 @@ export const projectsData = [
     tech: ['Java', 'Spring Boot', 'AAS', 'PLC Drivers', 'REST'],
     status: 'prototype',
   },
-
+  {
+    name: 'MQTT-PLC Pipeline',
+    summary:
+      'Industrial application connecting MQTT Broker with Siemens S7 PLCs for real-time monitoring and control.',
+    highlights: [
+      'Implemented a bridge between MQTT and PLC, in Pythonusing snap-7 for Siemens S7 integration enabling bidirectional communication.',
+      'This implementation has room to scale to several communication protocols and enables MQTT\'s topic configuration.'
+    ],
+    domain: 'IoT',
+    source: 'professional',
+    tech: ['Java', 'Spring Boot', 'AAS', 'PLC Drivers', 'REST'],
+    status: 'prototype',
+  },
   {
     name: 'AAS for Bio-Products in Aquaculture',
     summary:
