@@ -33,16 +33,16 @@ const LAYOUTS = {
       hero:        { x: 50, y: 50 },
       about:       { x: 87, y: 13 },
       experience:  { x: 95, y: 90 },
-      contact:     { x: 13, y: 13 },
-      research:    { x:  5, y: 55 },
-      development: { x: 50, y: 92 },
+      contact:     { x: 5, y: 10 },
+      research:    { x:  5, y: 50 },
+      development: { x: 40, y: 107 },
     },
     ghosts: [
       { key: 'about',       label: 'About',       phase: 0, x: '87vw', y: '13vh' },
       { key: 'experience',  label: 'Experience',  phase: 1, x: '95vw', y: '90vh' },
-      { key: 'contact',     label: 'Contact',     phase: 2, x: '13vw', y: '13vh' },
+      { key: 'contact',     label: 'Contact',     phase: 2, x: '5vw',  y: '10vh' },
       { key: 'research',    label: 'Research',    phase: 3, x: '5vw',  y: '55vh' },
-      { key: 'development', label: 'Development', phase: 4, x: '50vw', y: '92vh' },
+      { key: 'development', label: 'Development', phase: 4, x: '40vw', y: '107vh' },
     ],
     edges: [
       { id: 'center-about',       from: 'hero', to: 'about' },
@@ -90,10 +90,10 @@ const LAYOUTS = {
     CenterComp: ContactNode,
     nodes: {
       contact: { x: 50, y: 50 },
-      hero:    { x:  8, y: 40 },
+      hero:    { x:  95, y: 90 },
     },
     ghosts: [
-      { key: 'hero', label: 'Hero', phase: 0, x: '8vw', y: '40vh' },
+      { key: 'hero', label: 'Hero', phase: 0, x: '95vw', y: '90vh' },
     ],
     edges: [
       { id: 'center-hero', from: 'contact', to: 'hero' },
@@ -105,14 +105,14 @@ const LAYOUTS = {
     CenterComp: ResearchNode,
     nodes: {
       research:         { x: 50, y: 50 },
-      hero:             { x:  8, y: 85 },
-      researchProjects: { x: 90, y: 20 },
-      researchServices: { x: 90, y: 80 },
+      hero:             { x:  95, y: 50 },
+      researchProjects: { x: 25, y: 80 },
+      researchServices: { x: 75, y: 80 },
     },
     ghosts: [
-      { key: 'hero',             label: 'Hero',     phase: 0, x: '8vw',  y: '85vh' },
-      { key: 'researchProjects', label: 'Projects', phase: 1, x: '90vw', y: '20vh' },
-      { key: 'researchServices', label: 'Services', phase: 2, x: '90vw', y: '80vh' },
+      { key: 'hero',             label: 'Hero',     phase: 0, x: '95vw',  y: '50vh' },
+      { key: 'researchProjects', label: 'Projects', phase: 1, x: '25vw', y: '80vh' },
+      { key: 'researchServices', label: 'Services', phase: 2, x: '75vw', y: '80vh' },
     ],
     edges: [
       { id: 'center-hero',             from: 'research', to: 'hero' },
@@ -124,10 +124,10 @@ const LAYOUTS = {
     CenterComp: ResearchProjectsNode,
     nodes: {
       researchProjects: { x: 50, y: 50 },
-      research:         { x:  8, y: 50 },
+      research:         { x:  75, y: 20 },
     },
     ghosts: [
-      { key: 'research', label: 'Research', phase: 0, x: '8vw', y: '50vh' },
+      { key: 'research', label: 'Research', phase: 0, x: '75vw', y: '20vh' },
     ],
     edges: [
       { id: 'center-research', from: 'researchProjects', to: 'research' },
@@ -137,10 +137,10 @@ const LAYOUTS = {
     CenterComp: ResearchServicesNode,
     nodes: {
       researchServices: { x: 50, y: 50 },
-      research:         { x:  8, y: 50 },
+      research:         { x:  25, y: 20 },
     },
     ghosts: [
-      { key: 'research', label: 'Research', phase: 0, x: '8vw', y: '50vh' },
+      { key: 'research', label: 'Research', phase: 0, x: '25vw', y: '20vh' },
     ],
     edges: [
       { id: 'center-research', from: 'researchServices', to: 'research' },
@@ -152,14 +152,14 @@ const LAYOUTS = {
     CenterComp: DevelopmentHubNode,
     nodes: {
       development:       { x: 50, y: 50 },
-      hero:              { x: 50, y:  5 },
-      webDevelopment:    { x: 15, y: 80 },
-      mobileDevelopment: { x: 85, y: 80 },
+      hero:              { x: 60, y:  3 },
+      webDevelopment:    { x: 25, y: 80 },
+      mobileDevelopment: { x: 75, y: 80 },
     },
     ghosts: [
-      { key: 'hero',              label: 'Hero',   phase: 0, x: '50vw', y: '5vh'  },
-      { key: 'webDevelopment',    label: 'Web',    phase: 1, x: '15vw', y: '80vh' },
-      { key: 'mobileDevelopment', label: 'Mobile', phase: 2, x: '85vw', y: '80vh' },
+      { key: 'hero',              label: 'Hero',   phase: 0, x: '60vw', y: '-7vh'  },
+      { key: 'webDevelopment',    label: 'Web',    phase: 1, x: '25vw', y: '80vh' },
+      { key: 'mobileDevelopment', label: 'Mobile', phase: 2, x: '75vw', y: '80vh' },
     ],
     edges: [
       { id: 'center-hero',              from: 'development', to: 'hero' },
@@ -173,14 +173,14 @@ const LAYOUTS = {
     CenterComp: WebDevelopmentNode,
     nodes: {
       webDevelopment: { x: 50, y: 50 },
-      development:    { x:  8, y: 50 },
-      webDevProjects: { x: 90, y: 20 },
-      webDevServices: { x: 90, y: 80 },
+      development:    { x:  75, y: 20 },
+      webDevProjects: { x: 25, y: 80 },
+      webDevServices: { x: 75, y: 80 },
     },
     ghosts: [
-      { key: 'development',    label: 'Hub',      phase: 0, x: '8vw',  y: '50vh' },
-      { key: 'webDevProjects', label: 'Projects', phase: 1, x: '90vw', y: '20vh' },
-      { key: 'webDevServices', label: 'Services', phase: 2, x: '90vw', y: '80vh' },
+      { key: 'development',    label: 'Hub',      phase: 0, x: '75vw',  y: '20vh' },
+      { key: 'webDevProjects', label: 'Projects', phase: 1, x: '25vw', y: '80vh' },
+      { key: 'webDevServices', label: 'Services', phase: 2, x: '75vw', y: '80vh' },
     ],
     edges: [
       { id: 'center-development',    from: 'webDevelopment', to: 'development' },
@@ -192,10 +192,10 @@ const LAYOUTS = {
     CenterComp: WebDevProjectsNode,
     nodes: {
       webDevProjects: { x: 50, y: 50 },
-      webDevelopment: { x:  8, y: 50 },
+      webDevelopment: { x:  75, y: 20 },
     },
     ghosts: [
-      { key: 'webDevelopment', label: 'Web Dev', phase: 0, x: '8vw', y: '50vh' },
+      { key: 'webDevelopment', label: 'Web Dev', phase: 0, x: '75vw', y: '20vh' },
     ],
     edges: [
       { id: 'center-webDevelopment', from: 'webDevProjects', to: 'webDevelopment' },
@@ -205,10 +205,10 @@ const LAYOUTS = {
     CenterComp: WebDevServicesNode,
     nodes: {
       webDevServices: { x: 50, y: 50 },
-      webDevelopment: { x:  8, y: 50 },
+      webDevelopment: { x:  25, y: 20 },
     },
     ghosts: [
-      { key: 'webDevelopment', label: 'Web Dev', phase: 0, x: '8vw', y: '50vh' },
+      { key: 'webDevelopment', label: 'Web Dev', phase: 0, x: '25vw', y: '20vh' },
     ],
     edges: [
       { id: 'center-webDevelopment', from: 'webDevServices', to: 'webDevelopment' },
@@ -220,14 +220,14 @@ const LAYOUTS = {
     CenterComp: MobileDevelopmentNode,
     nodes: {
       mobileDevelopment: { x: 50, y: 50 },
-      development:       { x:  8, y: 50 },
-      mobileDevProjects: { x: 90, y: 20 },
-      mobileDevServices: { x: 90, y: 80 },
+      development:       { x:  25, y: 20 },
+      mobileDevProjects: { x: 25, y: 80 },
+      mobileDevServices: { x: 75, y: 80 },
     },
     ghosts: [
-      { key: 'development',       label: 'Hub',      phase: 0, x: '8vw',  y: '50vh' },
-      { key: 'mobileDevProjects', label: 'Projects', phase: 1, x: '90vw', y: '20vh' },
-      { key: 'mobileDevServices', label: 'Services', phase: 2, x: '90vw', y: '80vh' },
+      { key: 'development',       label: 'Hub',      phase: 0, x: '25vw',  y: '20vh' },
+      { key: 'mobileDevProjects', label: 'Projects', phase: 1, x: '25vw', y: '80vh' },
+      { key: 'mobileDevServices', label: 'Services', phase: 2, x: '75vw', y: '80vh' },
     ],
     edges: [
       { id: 'center-development',       from: 'mobileDevelopment', to: 'development' },
@@ -239,10 +239,10 @@ const LAYOUTS = {
     CenterComp: MobileDevProjectsNode,
     nodes: {
       mobileDevProjects: { x: 50, y: 50 },
-      mobileDevelopment: { x:  8, y: 50 },
+      mobileDevelopment: { x:  75, y: 20 },
     },
     ghosts: [
-      { key: 'mobileDevelopment', label: 'Mobile Dev', phase: 0, x: '8vw', y: '50vh' },
+      { key: 'mobileDevelopment', label: 'Mobile Dev', phase: 0, x: '75vw', y: '20vh' },
     ],
     edges: [
       { id: 'center-mobileDevelopment', from: 'mobileDevProjects', to: 'mobileDevelopment' },
@@ -252,10 +252,10 @@ const LAYOUTS = {
     CenterComp: MobileDevServicesNode,
     nodes: {
       mobileDevServices: { x: 50, y: 50 },
-      mobileDevelopment: { x:  8, y: 50 },
+      mobileDevelopment: { x:  25, y: 20 },
     },
     ghosts: [
-      { key: 'mobileDevelopment', label: 'Mobile Dev', phase: 0, x: '8vw', y: '50vh' },
+      { key: 'mobileDevelopment', label: 'Mobile Dev', phase: 0, x: '25vw', y: '20vh' },
     ],
     edges: [
       { id: 'center-mobileDevelopment', from: 'mobileDevServices', to: 'mobileDevelopment' },

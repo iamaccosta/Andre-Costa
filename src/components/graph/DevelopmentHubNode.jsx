@@ -14,7 +14,7 @@ const BRANCHES = [
   {
     icon: '🌐',
     label: 'Web Development',
-    subtitle: 'React · Next.js · Node.js',
+    subtitle: 'React · Next.js · Node.js · Tailwind CSS · Framer Motion',
     accent: '#3b82f6',
     bg: 'rgba(59,130,246,0.08)',
     border: 'rgba(59,130,246,0.20)',
@@ -22,7 +22,7 @@ const BRANCHES = [
   {
     icon: '📱',
     label: 'Mobile Development',
-    subtitle: 'Kotlin · Android SDK',
+    subtitle: 'Kotlin · Flutter · Android SDK',
     accent: '#8b5cf6',
     bg: 'rgba(139,92,246,0.08)',
     border: 'rgba(139,92,246,0.20)',
