@@ -5,6 +5,17 @@ import HeroNode from './graph/HeroNode'
 import GhostNode from './graph/GhostNode'
 import AboutNode from './graph/AboutNode'
 import ExperienceNode from './graph/ExperienceNode'
+import ContactNode from './graph/ContactNode'
+import ResearchNode from './graph/ResearchNode'
+import ResearchProjectsNode from './graph/ResearchProjectsNode'
+import ResearchServicesNode from './graph/ResearchServicesNode'
+import DevelopmentHubNode from './graph/DevelopmentHubNode'
+import WebDevelopmentNode from './graph/WebDevelopmentNode'
+import WebDevProjectsNode from './graph/WebDevProjectsNode'
+import WebDevServicesNode from './graph/WebDevServicesNode'
+import MobileDevelopmentNode from './graph/MobileDevelopmentNode'
+import MobileDevProjectsNode from './graph/MobileDevProjectsNode'
+import MobileDevServicesNode from './graph/MobileDevServicesNode'
 import LightningCanvas from './graph/LightningCanvas'
 import ViewSwitcher from './graph/ViewSwitcher'
 import OrbTransition from './graph/OrbTransition'
@@ -19,17 +30,26 @@ const LAYOUTS = {
   hero: {
     CenterComp: HeroNode,
     nodes: {
-      hero:       { x: 50, y: 50 },
-      about:      { x: 87, y: 13 },
-      experience: { x: 95, y: 90 },
+      hero:        { x: 50, y: 50 },
+      about:       { x: 87, y: 13 },
+      experience:  { x: 95, y: 90 },
+      contact:     { x: 13, y: 13 },
+      research:    { x:  5, y: 55 },
+      development: { x: 50, y: 92 },
     },
     ghosts: [
-      { key: 'about',      label: 'About',      phase: 0, x: '87vw', y: '13vh' },
-      { key: 'experience', label: 'Experience', phase: 1, x: '95vw', y: '90vh' },
+      { key: 'about',       label: 'About',       phase: 0, x: '87vw', y: '13vh' },
+      { key: 'experience',  label: 'Experience',  phase: 1, x: '95vw', y: '90vh' },
+      { key: 'contact',     label: 'Contact',     phase: 2, x: '13vw', y: '13vh' },
+      { key: 'research',    label: 'Research',    phase: 3, x: '5vw',  y: '55vh' },
+      { key: 'development', label: 'Development', phase: 4, x: '50vw', y: '92vh' },
     ],
     edges: [
-      { id: 'center-about',      from: 'hero', to: 'about' },
-      { id: 'center-experience', from: 'hero', to: 'experience' },
+      { id: 'center-about',       from: 'hero', to: 'about' },
+      { id: 'center-experience',  from: 'hero', to: 'experience' },
+      { id: 'center-contact',     from: 'hero', to: 'contact' },
+      { id: 'center-research',    from: 'hero', to: 'research' },
+      { id: 'center-development', from: 'hero', to: 'development' },
     ],
   },
   about: {
@@ -52,18 +72,195 @@ const LAYOUTS = {
     CenterComp: ExperienceNode,
     nodes: {
       experience: { x: 50, y: 50 },
-      hero:       { x: 5, y: 10 },
+      hero:       { x:  5, y: 10 },
       about:      { x: 35, y: -20 },
     },
     ghosts: [
-      { key: 'hero',   label: 'Hero',   phase: 0, x: '5vw', y: '10vh' },
-      { key: 'about',  label: 'About',  phase: 1, x: '35vw', y: '-20vh' },
+      { key: 'hero',  label: 'Hero',  phase: 0, x: '5vw',  y: '10vh' },
+      { key: 'about', label: 'About', phase: 1, x: '35vw', y: '-20vh' },
     ],
     edges: [
-      { id: 'center-hero',   from: 'experience', to: 'hero' },
-      { id: 'center-about',  from: 'experience', to: 'about' },
+      { id: 'center-hero',  from: 'experience', to: 'hero' },
+      { id: 'center-about', from: 'experience', to: 'about' },
     ],
-  }
+  },
+
+  // ── Contact ────────────────────────────────────────────────────────────────
+  contact: {
+    CenterComp: ContactNode,
+    nodes: {
+      contact: { x: 50, y: 50 },
+      hero:    { x:  8, y: 40 },
+    },
+    ghosts: [
+      { key: 'hero', label: 'Hero', phase: 0, x: '8vw', y: '40vh' },
+    ],
+    edges: [
+      { id: 'center-hero', from: 'contact', to: 'hero' },
+    ],
+  },
+
+  // ── Research branch ────────────────────────────────────────────────────────
+  research: {
+    CenterComp: ResearchNode,
+    nodes: {
+      research:         { x: 50, y: 50 },
+      hero:             { x:  8, y: 85 },
+      researchProjects: { x: 90, y: 20 },
+      researchServices: { x: 90, y: 80 },
+    },
+    ghosts: [
+      { key: 'hero',             label: 'Hero',     phase: 0, x: '8vw',  y: '85vh' },
+      { key: 'researchProjects', label: 'Projects', phase: 1, x: '90vw', y: '20vh' },
+      { key: 'researchServices', label: 'Services', phase: 2, x: '90vw', y: '80vh' },
+    ],
+    edges: [
+      { id: 'center-hero',             from: 'research', to: 'hero' },
+      { id: 'center-researchProjects', from: 'research', to: 'researchProjects' },
+      { id: 'center-researchServices', from: 'research', to: 'researchServices' },
+    ],
+  },
+  researchProjects: {
+    CenterComp: ResearchProjectsNode,
+    nodes: {
+      researchProjects: { x: 50, y: 50 },
+      research:         { x:  8, y: 50 },
+    },
+    ghosts: [
+      { key: 'research', label: 'Research', phase: 0, x: '8vw', y: '50vh' },
+    ],
+    edges: [
+      { id: 'center-research', from: 'researchProjects', to: 'research' },
+    ],
+  },
+  researchServices: {
+    CenterComp: ResearchServicesNode,
+    nodes: {
+      researchServices: { x: 50, y: 50 },
+      research:         { x:  8, y: 50 },
+    },
+    ghosts: [
+      { key: 'research', label: 'Research', phase: 0, x: '8vw', y: '50vh' },
+    ],
+    edges: [
+      { id: 'center-research', from: 'researchServices', to: 'research' },
+    ],
+  },
+
+  // ── Development hub ────────────────────────────────────────────────────────
+  development: {
+    CenterComp: DevelopmentHubNode,
+    nodes: {
+      development:       { x: 50, y: 50 },
+      hero:              { x: 50, y:  5 },
+      webDevelopment:    { x: 15, y: 80 },
+      mobileDevelopment: { x: 85, y: 80 },
+    },
+    ghosts: [
+      { key: 'hero',              label: 'Hero',   phase: 0, x: '50vw', y: '5vh'  },
+      { key: 'webDevelopment',    label: 'Web',    phase: 1, x: '15vw', y: '80vh' },
+      { key: 'mobileDevelopment', label: 'Mobile', phase: 2, x: '85vw', y: '80vh' },
+    ],
+    edges: [
+      { id: 'center-hero',              from: 'development', to: 'hero' },
+      { id: 'center-webDevelopment',    from: 'development', to: 'webDevelopment' },
+      { id: 'center-mobileDevelopment', from: 'development', to: 'mobileDevelopment' },
+    ],
+  },
+
+  // ── Web branch ─────────────────────────────────────────────────────────────
+  webDevelopment: {
+    CenterComp: WebDevelopmentNode,
+    nodes: {
+      webDevelopment: { x: 50, y: 50 },
+      development:    { x:  8, y: 50 },
+      webDevProjects: { x: 90, y: 20 },
+      webDevServices: { x: 90, y: 80 },
+    },
+    ghosts: [
+      { key: 'development',    label: 'Hub',      phase: 0, x: '8vw',  y: '50vh' },
+      { key: 'webDevProjects', label: 'Projects', phase: 1, x: '90vw', y: '20vh' },
+      { key: 'webDevServices', label: 'Services', phase: 2, x: '90vw', y: '80vh' },
+    ],
+    edges: [
+      { id: 'center-development',    from: 'webDevelopment', to: 'development' },
+      { id: 'center-webDevProjects', from: 'webDevelopment', to: 'webDevProjects' },
+      { id: 'center-webDevServices', from: 'webDevelopment', to: 'webDevServices' },
+    ],
+  },
+  webDevProjects: {
+    CenterComp: WebDevProjectsNode,
+    nodes: {
+      webDevProjects: { x: 50, y: 50 },
+      webDevelopment: { x:  8, y: 50 },
+    },
+    ghosts: [
+      { key: 'webDevelopment', label: 'Web Dev', phase: 0, x: '8vw', y: '50vh' },
+    ],
+    edges: [
+      { id: 'center-webDevelopment', from: 'webDevProjects', to: 'webDevelopment' },
+    ],
+  },
+  webDevServices: {
+    CenterComp: WebDevServicesNode,
+    nodes: {
+      webDevServices: { x: 50, y: 50 },
+      webDevelopment: { x:  8, y: 50 },
+    },
+    ghosts: [
+      { key: 'webDevelopment', label: 'Web Dev', phase: 0, x: '8vw', y: '50vh' },
+    ],
+    edges: [
+      { id: 'center-webDevelopment', from: 'webDevServices', to: 'webDevelopment' },
+    ],
+  },
+
+  // ── Mobile branch ──────────────────────────────────────────────────────────
+  mobileDevelopment: {
+    CenterComp: MobileDevelopmentNode,
+    nodes: {
+      mobileDevelopment: { x: 50, y: 50 },
+      development:       { x:  8, y: 50 },
+      mobileDevProjects: { x: 90, y: 20 },
+      mobileDevServices: { x: 90, y: 80 },
+    },
+    ghosts: [
+      { key: 'development',       label: 'Hub',      phase: 0, x: '8vw',  y: '50vh' },
+      { key: 'mobileDevProjects', label: 'Projects', phase: 1, x: '90vw', y: '20vh' },
+      { key: 'mobileDevServices', label: 'Services', phase: 2, x: '90vw', y: '80vh' },
+    ],
+    edges: [
+      { id: 'center-development',       from: 'mobileDevelopment', to: 'development' },
+      { id: 'center-mobileDevProjects', from: 'mobileDevelopment', to: 'mobileDevProjects' },
+      { id: 'center-mobileDevServices', from: 'mobileDevelopment', to: 'mobileDevServices' },
+    ],
+  },
+  mobileDevProjects: {
+    CenterComp: MobileDevProjectsNode,
+    nodes: {
+      mobileDevProjects: { x: 50, y: 50 },
+      mobileDevelopment: { x:  8, y: 50 },
+    },
+    ghosts: [
+      { key: 'mobileDevelopment', label: 'Mobile Dev', phase: 0, x: '8vw', y: '50vh' },
+    ],
+    edges: [
+      { id: 'center-mobileDevelopment', from: 'mobileDevProjects', to: 'mobileDevelopment' },
+    ],
+  },
+  mobileDevServices: {
+    CenterComp: MobileDevServicesNode,
+    nodes: {
+      mobileDevServices: { x: 50, y: 50 },
+      mobileDevelopment: { x:  8, y: 50 },
+    },
+    ghosts: [
+      { key: 'mobileDevelopment', label: 'Mobile Dev', phase: 0, x: '8vw', y: '50vh' },
+    ],
+    edges: [
+      { id: 'center-mobileDevelopment', from: 'mobileDevServices', to: 'mobileDevelopment' },
+    ],
+  },
 }
 
 export default function GraphView({ onSwitchView }) {
