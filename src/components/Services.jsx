@@ -83,7 +83,7 @@ const Services = () => {
     const currentDemo = serviceDemos.find(d => d.key === activeDemo);
 
     return (
-        <div id="services" className="relative md:py-0 xs:py-10 overflow-hidden">
+        <div id="services" className="relative py-10 overflow-hidden">
 
             {/* ── Decorative background ──────────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0">
@@ -100,7 +100,7 @@ const Services = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-20"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-10"
             >
                 {servicesData.map((service) => (
                     <ServiceCard key={service.title} {...service} />
@@ -113,7 +113,7 @@ const Services = () => {
                 whileInView={{ opacity: 1, scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="flex items-center gap-4 mb-16 origin-left"
+                className="flex items-center gap-4 mb-4 origin-left"
             >
                 <div className="h-px flex-1 bg-zinc-100 dark:bg-zinc-800" />
                 <div className="flex items-center gap-2 shrink-0">

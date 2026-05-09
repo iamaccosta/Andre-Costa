@@ -126,7 +126,7 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-                className="mt-16 flex flex-wrap gap-4"
+                className="mt-4 flex flex-wrap gap-4"
             >
                 {aboutData.map((item) => (
                     <Achievements
